@@ -23,14 +23,38 @@ export interface Measurement {
     soilMoisture: number;
     sunlight: number;
     temperature: number;
+    time: Date;
 }
-export interface MeasurementBorders {
-    currency: string;
+export interface MeasurementRange {
+    id: string;
+    type: string;
+    unit: string;
     min: number;
     max: number;
+    plantId: string;
+}
+export interface MeasurementRangeCreationParameters {
+    type: string;
+    unit: string;
+    min: number;
+    max: number;
+    plantId: string;
 }
 export interface PlantMeasurementHistoryParameters {
     start: Date;
     end: Date;
+}
+export declare enum MeasurementType {
+    BATTERY = "BATTERY",
+    SOILFERTILITY = "SOILFERTILITY",
+    SOILMOISTURE = "SOILMOISTURE",
+    TEMPERATURE = "TEMPERATURE",
+    SUNLIGHT = "SUNLIGHT"
+}
+export declare enum MeasurementUnit {
+    PERCENTAGE = "%",
+    CONDUCTIVITY = "\u00B5S/cm",
+    CELSIUS = "\u00B0C",
+    LUX = "Lux"
 }
 //# sourceMappingURL=plant.d.ts.map
