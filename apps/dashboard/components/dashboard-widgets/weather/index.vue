@@ -1,11 +1,13 @@
 <template>
-  <DayForecast
-    :style="{ backgroundImage: backgroundImage }"
-    v-if="weatherForecast && Object.keys(weatherForecast).length !== 0"
-    class="forecast"
-    :sunset="sunset"
-    :weatherForecast="weatherForecast"
-  />
+  <Transition>
+    <DayForecast
+      v-if="weatherForecast && Object.keys(weatherForecast).length !== 0"
+      :style="{ backgroundImage: backgroundImage }"
+      class="forecast"
+      :sunset="sunset"
+      :weatherForecast="weatherForecast"
+    />
+  </Transition>
 </template>
 
 <script lang="ts" setup>
@@ -47,9 +49,13 @@ const defineBackground = () => {
   const sunsetInMinutes = sunsetTime.getHours() * 60 + sunsetTime.getMinutes()
   const now = new Date()
   const nowInMinutes = now.getHours() * 60 + now.getMinutes()
-  //DAY
 
-  if (sunsetInMinutes > nowInMinutes) {
+  // Darkmode
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    backgroundImage.value = 'linear-gradient(-150deg, #045d73 0%, #676b82 100%)'
+  }
+  // DAY
+  else if (sunsetInMinutes > nowInMinutes) {
     sunset.value = false
     switch (weatherForecast.value.current.weather[0].main) {
       case 'Snow':
@@ -63,7 +69,7 @@ const defineBackground = () => {
         break
     }
   }
-  //NIGHT
+  // NIGHT
   else {
     sunset.value = true
     backgroundImage.value = 'linear-gradient(-150deg, #045d73 0%, #676b82 100%)'
@@ -72,7 +78,7 @@ const defineBackground = () => {
 </script>
 
 <style lang="scss">
-@import '../../../../../packages/style/variables.scss';
+@import '@nevo/style/variables.scss';
 .forecast {
   height: 100%;
 }

@@ -1,10 +1,12 @@
 <template>
-  <div class="room-climate-wrapper" v-if="store.homeclimateSensors">
-    <RoomClimate
-      :room-climate="roomClimate"
-      v-for="roomClimate in Object.entries(homeclimateSensorsForEachRoom)"
-    />
-  </div>
+  <Transition>
+    <div class="room-climate-wrapper" v-if="store.homeclimateSensors">
+      <RoomClimate
+        :room-climate="roomClimate"
+        v-for="roomClimate in Object.entries(homeclimateSensorsForEachRoom)"
+      />
+    </div>
+  </Transition>
 </template>
 
 <script lang="ts" setup>

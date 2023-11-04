@@ -23,7 +23,7 @@ export interface Location {
 }
 
 export interface Borders {
-  currency: string
+  unit: string
   min: number
   max: number
 }

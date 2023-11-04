@@ -1,8 +1,11 @@
 <template>
-  <button :disabled="!isReady" @click="() => login()">Login with Google</button>
+  <div class="settings-container">
+    <nv-button :disabled="!isReady" @click="() => login()">Login with Google</nv-button>
+  </div>
 </template>
 
 <script lang="ts" setup>
+import { nvButton } from '@nevo/ui'
 import {
   useCodeClient,
   type ImplicitFlowErrorResponse,

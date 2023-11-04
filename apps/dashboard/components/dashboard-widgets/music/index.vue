@@ -1,20 +1,22 @@
 <template>
-  <div class="music-wrapper">
-    <div class="music-main">
-      <template v-if="musicPlaying || latestActiveGroup">
-        <Player
-          :activeGroup="activeGroup"
-          :latestActiveGroup="latestActiveGroup"
-          @update-zones="updateZones"
-          @standby="showStandbyScreen"
-        />
-      </template>
-      <template v-else>
-        <Shortcuts></Shortcuts>
-      </template>
+  <Transition>
+    <div class="music-wrapper">
+      <div class="music-main">
+        <template v-if="musicPlaying || latestActiveGroup">
+          <Player
+            :activeGroup="activeGroup"
+            :latestActiveGroup="latestActiveGroup"
+            @update-zones="updateZones"
+            @standby="showStandbyScreen"
+          />
+        </template>
+        <template v-else>
+          <Shortcuts></Shortcuts>
+        </template>
+      </div>
+      <div class="music-footer"></div>
     </div>
-    <div class="music-footer"></div>
-  </div>
+  </Transition>
 </template>
 
 <script lang="ts" setup>

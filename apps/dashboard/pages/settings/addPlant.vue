@@ -1,28 +1,58 @@
 <script lang="ts" setup>
 import { Location, MiFloraDevice, PlantCreationParameters } from '@nevo/domain-types'
-import { usePlantService } from '~~/services/plant'
+import { nvButton, nvInput, nvSelect } from '@nevo/ui'
 
+import { usePlantService } from '~~/services/plant'
 const router = useRouter()
 const plantService = usePlantService()
-
 const sensors = ref<MiFloraDevice[]>()
 const locations = ref<Location[]>()
 const requestingSensors = ref(false)
 const selectedLocation = ref<Location>()
+let requestInterval: NodeJS.Timer
 
 onMounted(async () => {
-  await getNearbySensors()
+  await getNearbySensors(5000)
+
+  requestInterval = setInterval(async () => {
+    await getNearbySensors(5000)
+  }, 5000)
+
   locations.value = await plantService.getAllLocations()
 })
 
-const getNearbySensors = async () => {
+onUnmounted(() => {
+  clearInterval(requestInterval)
+})
+
+const requestBlinking = ref(false)
+const blinkingInProgress = ref(false)
+const blinking = async () => {
+  requestBlinking.value = true
+
+  await plantService.blinking(plantCreationParameters.value.address)
+
+  requestBlinking.value = false
+  blinkingInProgress.value = true
+  setTimeout(() => {
+    blinkingInProgress.value = false
+  }, 5000)
+}
+
+const getNearbySensors = async (duration: number) => {
   requestingSensors.value = true
-  sensors.value = await plantService.discover()
+  try {
+    sensors.value = await plantService.discover(duration)
+    if (sensors.value.length === 0) {
+      await getNearbySensors(10000)
+    }
+  } catch (err: any) {}
   requestingSensors.value = false
 }
 
 const plantCreationParameters = ref<PlantCreationParameters>({ name: '', address: '', version: '' })
 const selectSensor = (device: MiFloraDevice) => {
+  clearInterval(requestInterval)
   plantCreationParameters.value.address = device.address
   plantCreationParameters.value.version = '0.0.0'
 }
@@ -39,72 +69,62 @@ const save = async () => {
 
 <template>
   <div>
+    <h3>Adding plant sensors</h3>
     <div class="plant-list-header">
-      <button class="hover-button refresh-button" @click="getNearbySensors">
-        <div class="svg-icon-container" :class="{ rotating: requestingSensors }">
-          <svg
-            fill="#000000"
-            version="1.1"
-            id="Capa_1"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            width="800px"
-            height="800px"
-            viewBox="0 0 568.017 568.017"
-            xml:space="preserve"
-          >
-            <g>
-              <g>
-                <path
-                  d="M72.553,400.503c11.12,11.119,29.156,11.119,40.282,0l71.849-83.238c11.12-11.119,7.387-20.141-8.342-20.141h-46.444
-			c-3.929-52.24,14.688-104.059,52.999-142.37c71.194-71.188,187.022-71.188,258.209,0c34.486,34.486,53.477,80.331,53.477,129.102
-			c0,48.77-18.996,94.616-53.477,129.102c-49.395,49.395-121.219,66.23-187.511,43.936c-19.205-6.488-40.043,3.867-46.512,23.09
-			c-6.469,19.223,3.868,40.043,23.09,46.512c27.124,9.131,54.903,13.574,82.388,13.574c66.623,0,131.439-26.156,180.461-75.184
-			c48.36-48.355,74.994-112.645,74.994-181.036c0-68.392-26.634-132.676-74.994-181.036c-99.823-99.823-262.243-99.823-362.06,0
-			c-52.424,52.424-78.636,122.871-74.75,194.304H14.744c-15.728,0-19.461,9.014-8.341,20.141L72.553,400.503z"
-                />
-              </g>
-            </g>
-          </svg>
-        </div>
-      </button>
+      <template v-if="requestingSensors">
+        <loading />
+      </template>
     </div>
-    <div class="plants-sensor-list-container">
-      <div v-if="requestingSensors" class="plant-sensor-searching-placehnolder">
+    <!--  -->
+    <div v-if="requestingSensors || sensors != null" class="list-container">
+      <div
+        v-if="requestingSensors && (sensors == null || sensors?.values.length === 0)"
+        class="plant-sensor-searching-placeholder"
+      >
         Searching for nearby Sensors ...
       </div>
       <div
         v-if="!requestingSensors && sensors?.length == 0"
-        class="plant-sensor-searching-placehnolder"
+        class="plant-sensor-searching-placeholder"
       >
         No Sensors found
       </div>
       <div
-        class="plant-sensor-row"
+        class="list-row"
         :class="{ 'selected-sensor': sensor.address === plantCreationParameters.address }"
         @click="selectSensor(sensor)"
         v-for="sensor in sensors"
       >
-        <div class="plant-sensor-row-left">
-          <div class="plant-sensor-row-name">{{ sensor.name ?? 'Undefined' }}</div>
-          <div class="plant-sensor-row-room">{{ sensor.address }}</div>
+        <div class="list-row-left">
+          <div class="list-row-name">{{ sensor.name ?? 'Undefined' }}</div>
+          <div class="list-row-room">{{ sensor.address }}</div>
         </div>
       </div>
     </div>
 
-    <div v-if="plantCreationParameters.address.length > 0" class="add-new-plant-sensor-form">
-      <input v-model="plantCreationParameters.name" type="text" />
+    <div v-if="plantCreationParameters.address.length > 0" class="settings-detail-container">
+      <nv-input label="Name" v-model="plantCreationParameters.name" type="text" />
       <!-- location selector -->
-      <select v-model="selectedLocation">
+      <nv-select label="Room" v-model="selectedLocation">
         <option v-for="location in locations" :value="location">{{ location.name }}</option>
-      </select>
-
-      <button @click="save">Save</button>
+      </nv-select>
+      <div class="settings-detail-sub">
+        <nv-button @click="blinking">
+          <template v-if="!requestBlinking && !blinkingInProgress">Blink</template>
+          <template v-else-if="requestBlinking && !blinkingInProgress"><Loading /></template>
+          <template v-else-if="!requestBlinking && blinkingInProgress">blinking</template>
+        </nv-button>
+      </div>
+      <div class="settings-detail-sub">
+        <nv-button @click="save">Save</nv-button>
+      </div>
     </div>
   </div>
 </template>
 
 <style lang="scss">
+@import '@nevo/style/variables.scss';
+
 .plant-list-header {
   display: grid;
   justify-items: right;
@@ -159,19 +179,12 @@ const save = async () => {
   animation: rotating 1s linear infinite;
 }
 
-.plant-sensor-searching-placehnolder {
+.plant-sensor-searching-placeholder {
   display: grid;
   align-items: center;
 }
 
 .selected-sensor {
-  color: blue;
-}
-
-.add-new-plant-sensor-form {
-  margin: 1rem 0;
-  display: grid;
-  grid-template-columns: auto 20% 10%;
-  gap: 1rem;
+  color: $nevo-primary-color-light;
 }
 </style>

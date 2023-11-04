@@ -13,7 +13,8 @@ body {
   /* Internet Explorer/Edge */
   user-select: none;
   /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   font-size: 16px;
 
   // height: 100vh;
@@ -31,6 +32,13 @@ body {
   overflow: hidden;
 }
 
+h6 {
+  margin: 0;
+  font-weight: 400;
+  color: $nevo-primary-text-color;
+  opacity: 70%;
+}
+
 .page-header,
 .page-footer {
   display: flex;
@@ -46,18 +54,17 @@ body {
 
 .box {
   border-radius: $standard-border-radius;
-  padding: 15px;
+  padding: $box-padding;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
   height: 12rem;
-  width: 22rem;
+  width: $box-width;
 }
 
-.box-white {
-  background-color: rgb(255, 255, 255);
-  backdrop-filter: blur(10px);
-}
-
-.box-xs-wrapper {
+@media (prefers-color-scheme: light) {
+  .main-box {
+    background-color: rgb(255, 255, 255);
+    backdrop-filter: blur(10px);
+  }
 }
 
 .main-info-content {
@@ -89,18 +96,9 @@ body {
   }
 }
 
-// .main-info-icon {
-//   float: left;
-//   height: 3vh;
-// }
-
-.large-widget {
-}
-
 .main-info-header {
   height: 20%;
   // margin-bottom: 1.6%;
-
 }
 
 .main-info-title {
@@ -151,46 +149,17 @@ body {
   width: 2vh;
 }
 
-.svg-icon-container{
+.svg-icon-container {
   height: 2vh;
-    width: 2vh;
-    overflow: hidden;
-    display: grid;
-    place-items: center;
+  width: 2vh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
 }
 
 .svg-icon-container > svg {
   width: 100%;
-    height: 65%;
-}
-
-.hover-button {
-  background-color: rgba(255, 255, 255, 0.2);
-  height: 3vh;
-  width: 3vh;
-  padding: 0.5vh;
-  display: grid;
-  border-width: 0;
-  border-style: solid;
-  border-radius: 8px;
-  place-items: center;
-    overflow: hidden;
-}
-
-.hover-button:hover {
-  background-color: rgb(255, 255, 255);
-  // cursor: none;
-}
-
-.main-button {
-  border-width: 0;
-  border-radius: 10x;
-  display: grid;
-  place-items: center;
-  height: 1.5rem;
-  font-size: 0.8rem;
-  height: 1.5rem;
-  fill: rgb(64, 64, 64);
+  height: 65%;
 }
 
 .title-1 {
@@ -234,21 +203,20 @@ body {
   height: 50%;
 }
 
-.widget-regular-header{
+.widget-regular-header {
   font-size: 1rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
 
-.refresh-button{
+.refresh-button {
   display: grid;
-    place-items: center;
+  place-items: center;
 }
 
 @-webkit-keyframes rotating
 
-/* Safari and Chrome */
-  {
+/* Safari and Chrome */ {
   from {
     -webkit-transform: rotate(0deg);
     -o-transform: rotate(0deg);
@@ -295,83 +263,114 @@ body {
   cursor: none;
 }
 
+//
 
-.plants-sensor-list-container {
+.list-container {
   padding: 0.8rem;
-  border-radius: 15px;
-  background-color: white;
+  border-radius: $standard-border-radius;
 }
 
-.plants-sensor-list-container > div {
+@media (prefers-color-scheme: light) {
+  .list-container {
+    background-color: white;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .list-container {
+    background-color: black;
+  }
+}
+
+.list-container > div,
+.list-container > a {
   border-bottom: 1px solid lightgray;
   padding-left: 15px;
   height: 4vh;
 }
 
-.plants-sensor-list-container > div:last-child {
+.list-container > div:last-child,
+.list-container > a:last-child {
   border: none;
 }
 
-.plant-sensor-row {
+.list-row {
   display: grid;
   grid-template-columns: 90% auto auto;
+
+  text-decoration: none;
+  color: $nevo-primary-text-color;
+  min-height: 2.8rem;
   padding: 0.3rem 1rem;
-
-  a {
-      text-decoration: none;
-     color:black
-    }
-
-  .plant-sensor-row-left {
+  .list-row-left {
     .plant-sensor-row-room {
       font-size: small;
-      color: rgb(115, 115, 115);
+      color: $nevo-primary-text-color;
     }
   }
 
-  .plant-sensor-row-right {
+  .list-row-right {
     justify-self: right;
     align-self: center;
 
-    .plant-sensor-row-version {
+    .list-row-version {
       font-size: medium;
-      color: rgba(115, 115, 115, 0.615);
+      color: $nevo-primary-text-color;
     }
   }
 
-  .plant-sensor-row-details-icon {
+  .list-row-details-icon {
     justify-self: right;
     align-self: center;
-    color: rgba(115, 115, 115, 0.615);
+    color: $nevo-primary-text-color;
   }
 }
 
-button {
-  border-radius: 10px;
-  border-style: none;
-  background-color: white;
-  padding: 5px 10px;
-font-weight: bold;
+.add-new-entry-row {
+  display: grid;
+  align-content: center;
+  min-height: 2rem;
   a {
-        text-decoration: none;
-          color: #9604ff8a;
+    text-decoration: none;
+    color: $nevo-primary-color-light;
   }
 }
 
-button:hover{
-  background-color: rgb(245, 220, 243);
+.empty-list-container {
+  display: grid;
+  height: 100%;
+  place-items: center;
 }
 
-input {
-  border-radius: 10px;
-  border-style: none;
-
-  padding: 5px 10px
+.empty-list-info {
+  display: grid;
+  place-items: center;
 }
 
-select {
-  padding: 5px 10px;
-  border-radius: 10px;
-  border-style: none;
+.nv-input-headline {
+  font-size: 0.8rem;
+  margin-left: 10px;
 }
 
+.bounce-button:active {
+  transition: 0s;
+  animation: press 0.4s 1 linear;
+}
+
+@keyframes press {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.92);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.settings-header {
+  display: inline-flex;
+  gap: 1rem;
+  align-items: center;
+}

@@ -1,6 +1,10 @@
 <template>
-  <div class="shortcut-pill" :class="{ shake: animatedLoginButton }" @click="triggerShortcut">
-    <span>⠕ {{ shortcut.attributes.friendly_name }}</span>
+  <div
+    class="shortcut-pill bounce-button"
+    :class="{ shake: animatedLoginButton }"
+    @click="triggerShortcut"
+  >
+    <div class="shotcut-pill-text">⠕ {{ shortcut.attributes.friendly_name }}</div>
   </div>
 </template>
 
@@ -48,18 +52,38 @@ const showShakeAnimation = () => {
 </script>
 
 <style lang="scss">
-@import '../../../packages/style/main.scss';
+@import '@nevo/style/main.scss';
+
 .shortcut-pill {
   margin: 1rem 1px;
-  background-color: white;
   border-radius: 99px;
   height: 2rem;
   display: grid;
-  place-items: center;
+  justify-items: left;
+  align-items: center;
+  padding: 0 0.5rem;
   font-size: 0.8rem;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   backdrop-filter: saturate(130%) blur(20px);
   cursor: pointer;
+  min-width: 9rem;
+}
+
+@media (prefers-color-scheme: light) {
+  .shortcut-pill {
+    background-color: white;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .shortcut-pill {
+    background-color: $black;
+    color: $white;
+  }
+}
+
+.shotcut-pill-text {
+  white-space: nowrap;
 }
 
 .shake {

@@ -1,4 +1,5 @@
-import { IsNotEmpty } from 'class-validator';
+import { MeasurementType } from '@nevo/domain-types'
+import { IsNotEmpty } from 'class-validator'
 import {
   Column,
   Entity,
@@ -6,102 +7,99 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
-  Relation,
-} from 'typeorm';
-import { LocationEntity } from '../../locations/entities/location.entity.js';
+  Relation
+} from 'typeorm'
+import { LocationEntity } from '../../locations/entities/location.entity.js'
 
 @Entity({
-  name: 'plant',
+  name: 'plant'
 })
 class PlantEntity {
   @PrimaryGeneratedColumn('uuid')
-  id!: string;
+  id!: string
 
   @Column({ type: 'nvarchar' })
-  name!: string;
+  name!: string
 
   @Column({ type: 'nvarchar' })
-  address!: string;
+  address!: string
 
   @Column({ type: 'nvarchar' })
-  version!: string;
+  version!: string
 
   @ManyToOne(() => LocationEntity, {
-    createForeignKeyConstraints: false,
+    createForeignKeyConstraints: false
   })
-  location?: LocationEntity;
+  location?: LocationEntity
 
   @OneToMany(() => MeasurementEntity, (measurement) => measurement.plant)
-  measurement?: Relation<MeasurementEntity>[];
+  measurement?: Relation<MeasurementEntity>[]
 
-  @OneToMany(
-    () => MeasurementRangeEntity,
-    (measurementRange) => measurementRange.plant,
-  )
-  measurementRange?: Relation<MeasurementEntity>[];
+  @OneToMany(() => MeasurementRangeEntity, (measurementRange) => measurementRange.plant)
+  measurementRange?: Relation<MeasurementEntity>[]
 
   constructor(props: any) {
-    Object.assign(this, props);
+    Object.assign(this, props)
   }
 }
 
 @Entity({
-  name: 'measurement_range',
+  name: 'measurement_range'
 })
 class MeasurementRangeEntity {
   @PrimaryGeneratedColumn('uuid')
-  id!: string;
+  id!: string
 
   @Column({ type: 'nvarchar' })
-  type!: string;
+  type!: MeasurementType
 
   @Column({ type: 'int' })
-  min!: number;
+  min!: number
 
   @Column({ type: 'int' })
-  max!: number;
+  max!: number
 
   @Column({ type: 'nvarchar' })
-  unit!: string;
+  unit!: string
 
   @ManyToOne(() => PlantEntity, (plant) => plant.id)
   @JoinColumn()
-  plant?: PlantEntity;
+  plant?: PlantEntity
 
   constructor(props: any) {
-    Object.assign(this, props);
+    Object.assign(this, props)
   }
 }
 
 @Entity({
-  name: 'measurement',
+  name: 'measurement'
 })
 class MeasurementEntity {
   @PrimaryGeneratedColumn('uuid')
-  id!: string;
+  id!: string
 
   @IsNotEmpty()
   @Column({ type: 'nvarchar' })
-  type!: string;
+  type!: string
 
   @IsNotEmpty()
   @Column({ type: 'int' })
-  value!: number;
+  value!: number
 
   @IsNotEmpty()
   @Column({ type: 'nvarchar' })
-  unit!: string;
+  unit!: string
 
   @IsNotEmpty()
-  datetime!: Date;
+  datetime!: Date
 
   @ManyToOne(() => PlantEntity, (plant) => plant.id)
   @JoinColumn()
-  plant?: PlantEntity;
+  plant?: PlantEntity
 
   constructor(props: any) {
-    Object.assign(this, props);
+    Object.assign(this, props)
   }
 }
 
-export { PlantEntity, MeasurementEntity, MeasurementRangeEntity };
+export { PlantEntity, MeasurementEntity, MeasurementRangeEntity }

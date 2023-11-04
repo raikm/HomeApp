@@ -1,24 +1,24 @@
-import { Location, type Plant as IPlant } from '@nevo/domain-types';
-import { IsMACAddress, IsNotEmpty, IsSemVer, IsUUID } from 'class-validator';
+import { Location, type Plant as IPlant } from '@nevo/domain-types'
+import { IsMACAddress, IsNotEmpty, IsSemVer, IsUUID } from 'class-validator'
 
 export class Plant implements IPlant {
   @IsUUID()
-  id!: string;
+  id!: string
 
   @IsNotEmpty()
-  name!: string;
+  name!: string
 
   @IsNotEmpty()
   @IsMACAddress()
-  address!: string;
+  address!: string
 
   @IsNotEmpty()
   @IsSemVer()
-  version!: string;
+  version!: string
 
-  location?: Location | undefined;
+  location?: Location | undefined
 
   constructor(init?: Location) {
-    Object.assign(this, init);
+    Object.assign(this, init)
   }
 }

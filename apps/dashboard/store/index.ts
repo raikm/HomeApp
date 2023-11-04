@@ -1,15 +1,19 @@
-import { defineStore } from "pinia";
-import { NevoConfig } from "../types/nevoConfig";
+import { defineStore } from 'pinia'
+import { NevoConfig } from '../types/nevoConfig'
 export interface State {
-  config: NevoConfig | undefined;
-  spotifyAccessToken: string;
+  config: NevoConfig | undefined
+  spotifyAccessToken: string
+  toastType: string | undefined
+  toastMessage: string | undefined
 }
 
-export const useStore = defineStore("store", {
+export const useStore = defineStore('store', {
   state: (): State => {
     return {
       config: undefined,
-      spotifyAccessToken: "",
-    };
-  },
-});
+      spotifyAccessToken: '',
+      toastType: undefined,
+      toastMessage: undefined
+    }
+  }
+})

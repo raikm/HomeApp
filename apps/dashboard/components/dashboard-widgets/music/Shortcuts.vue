@@ -20,12 +20,13 @@
     </div>
     <div v-else class="service-info">
       Service not available
-      <button @click="requestAuthorization">Connect to Spotify</button>
+      <nv-button @click="requestAuthorization">Connect to Spotify</nv-button>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { nvButton } from '@nevo/ui'
 import axios from 'axios'
 import { ref } from 'vue'
 import { useStore } from '../../../store/index'

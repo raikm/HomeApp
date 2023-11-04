@@ -2,20 +2,16 @@
   <div id="menu-main-wrapper">
     <div id="menu-main">
       <Transition name="slide-fade">
-        <div
-          v-if="!showMenu"
-          class="menu-trigger menu-open"
-          @click="showMenu = true"
-        >
-          <span>◠</span>
+        <div v-if="!showMenu" class="menu-trigger menu-open bounce-button" @click="showMenu = true">
+          <div>◌</div>
         </div>
       </Transition>
       <Transition name="slide-fade">
         <div v-if="showMenu" id="menu-pills">
           <div
             @click="changePage('index', 0)"
-            class="menu-button-new"
-            :class="{ active: activeIndex === 0 }"
+            class="menu-button-new bounce-button"
+            :class="{ activeMenu: activeIndex === 0 }"
           >
             <div class="menu-icon-wrapper">
               <svg
@@ -36,8 +32,8 @@
           </div>
           <div
             @click="changePage('rooms', 1)"
-            class="menu-button-new"
-            :class="{ active: activeIndex === 1 }"
+            class="menu-button-new bounce-button"
+            :class="{ activeMenu: activeIndex === 1 }"
           >
             <div class="menu-icon-wrapper">
               <svg
@@ -63,8 +59,8 @@
           </div>
           <div
             @click="changePage('plants', 2)"
-            class="menu-button-new"
-            :class="{ active: activeIndex === 2 }"
+            class="menu-button-new bounce-button"
+            :class="{ activeMenu: activeIndex === 2 }"
           >
             <div class="menu-icon-wrapper">
               <svg
@@ -82,8 +78,8 @@
             </div>
             <div class="menu-text">Plants</div>
           </div>
-          <div class="menu-trigger menu-close" @click="showMenu = false">
-            <span>⨵</span>
+          <div class="menu-trigger menu-close bounce-button" @click="showMenu = false">
+            <div>✕</div>
           </div>
         </div>
       </Transition>
@@ -91,8 +87,8 @@
     <!-- v-slot for persons -->
     <div id="settings">
       <div
-        class="settings-wrapper"
-        :class="{ active: activeIndex === 100 }"
+        class="settings-wrapper bounce-button"
+        :class="{ activeMenu: activeIndex === 100 }"
         @click="changePage('settings', 100)"
       >
         <svg
@@ -112,161 +108,170 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from "vue";
+import { ref } from 'vue'
 
-  const activeIndex = ref(0);
-  const showMenu = ref(false);
+const activeIndex = ref(0)
+const showMenu = ref(false)
 
-  const changePage = async (name: string, index: number) => {
-    activeIndex.value = index;
-    await navigateTo({
-      name: name,
-    });
-  };
+const changePage = async (name: string, index: number) => {
+  activeIndex.value = index
+  await navigateTo({
+    name: name
+  })
+}
 </script>
 
 <style lang="scss">
-  @import "../../../../packages/style/main.scss";
-  @import "../../../../packages/style/variables.scss";
+@import '@nevo/style//main.scss';
+@import '@nevo/style/variables.scss';
 
-  #menu-main-wrapper {
+#menu-main-wrapper {
+  display: grid;
+  grid-template-columns: auto 20%;
+  align-items: center;
+  position: relative;
+  #menu-main {
+    height: 100%;
+  }
+
+  #menu-pills {
+    display: flex;
+    column-gap: $standard-space;
+    position: absolute;
+    z-index: 3;
+  }
+
+  .menu-open {
+    position: absolute;
+    z-index: 1;
+  }
+
+  .menu-icon-wrapper > svg {
+    height: 0.8rem;
+    width: 0.8rem;
+  }
+  .menu-icon-wrapper {
     display: grid;
-    grid-template-columns: auto 20%;
+    justify-self: right;
+  }
+  .menu-text {
+    justify-self: left;
+    padding-left: 0.8rem;
+  }
+
+  .menu-trigger {
+    width: 2rem;
+  }
+
+  .menu-trigger:hover {
+    background-color: white;
+  }
+
+  .menu-trigger > div {
+    font-size: medium;
+  }
+
+  .menu-close {
+    background-color: $light-gray;
+  }
+
+  .menu-close:hover {
+    background-color: white;
+  }
+
+  .menu-close > span {
+    transform: rotate(180deg);
+    margin-left: -3px;
+  }
+  .menu-trigger,
+  .menu-button-new {
+    border-radius: 99px;
+    height: 2rem;
+    display: grid;
+    grid-template-columns: 2rem auto;
+
+    place-items: center;
+    font-size: 0.8rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    backdrop-filter: saturate(130%) blur(20px);
+
+    cursor: pointer;
+  }
+
+  .menu-button-new {
+    width: 8rem;
+    background-color: $light-gray;
+  }
+
+  .menu-button-new:hover {
+    background-color: white;
+  }
+
+  #settings {
+    display: grid;
+  }
+  #people {
+    display: inline-flex;
+    column-gap: calc($standard-space / 3);
+    justify-self: right;
+  }
+
+  .settings-wrapper {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    backdrop-filter: saturate(130%) blur(20px);
+    background-color: $light-gray;
+    border-radius: 50%;
+    width: 2rem;
+    display: grid;
+    justify-items: center;
     align-items: center;
-    // margin: calc($standard-space * 2) 0;
-    margin: 0 1rem;
-    position: relative;
-    #menu-main {
-      height: 100%;
-    }
-
-    #menu-pills {
-      display: flex;
-      column-gap: $standard-space;
-      position: absolute;
-      z-index: 3;
-    }
-
-    .menu-open {
-      position: absolute;
-      z-index: 1;
-    }
-
-    .menu-icon-wrapper > svg {
-      height: 0.8rem;
-      width: 0.8rem;
-    }
-    .menu-icon-wrapper {
-      display: grid;
-      justify-self: right;
-    }
-    .menu-text {
-      justify-self: left;
-      padding-left: 0.8rem;
-    }
-
-    .menu-trigger {
-      width: 2rem;
-    }
-
-    .menu-trigger > span {
-      font-size: large;
-    }
-
-    .menu-close {
-      background-color: rgb(234, 234, 234);
-    }
-
-    .menu-close:hover {
-      background-color: white;
-    }
-
-    .menu-close > span {
-      transform: rotate(180deg);
-      margin-left: -3px;
-    }
-    .menu-trigger,
-    .menu-button-new {
-      border-radius: 99px;
-      height: 2rem;
-      display: grid;
-      grid-template-columns: 2rem auto;
-
-      place-items: center;
-      font-size: 0.8rem;
-      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
-        0 1px 2px 0 rgba(0, 0, 0, 0.06);
-      backdrop-filter: saturate(130%) blur(20px);
-
-      cursor: pointer;
-    }
-
-    .menu-button-new {
-      width: 8rem;
-      background-color: rgb(234, 234, 234);
-    }
-
-    .menu-button-new:hover {
-      background-color: white;
-    }
-
-    #settings {
-      display: grid;
-      grid-template-columns: auto 2.5rem;
-    }
-    #people {
-      display: inline-flex;
-      column-gap: calc($standard-space / 3);
-      justify-self: right;
-    }
-
-    .settings-wrapper {
-      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
-        0 1px 2px 0 rgba(0, 0, 0, 0.06);
-      backdrop-filter: saturate(130%) blur(20px);
-      background-color: rgb(244, 244, 244);
-      border-radius: 50%;
-      width: 2rem;
-      display: grid;
-      justify-items: center;
-      align-items: center;
-      justify-self: right;
-    }
-    .settings-wrapper > svg {
-      padding: 0.2rem;
-      height: 1.6rem;
-      width: 1.6rem;
-      fill: rgba(0, 0, 0, 0.479);
-    }
-    .settings-wrapper:hover {
-      background-color: white;
-      cursor: pointer;
-    }
+    justify-self: right;
   }
-
-  #menu-pills::-webkit-scrollbar {
-    display: none;
+  .settings-wrapper > svg {
+    padding: 0.2rem;
+    height: 1.6rem;
+    width: 1.6rem;
+    fill: rgba(0, 0, 0, 0.479);
   }
+  .settings-wrapper:hover {
+    background-color: white;
+    cursor: pointer;
+  }
+}
 
-  .active,
+#menu-pills::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-color-scheme: light) {
+  .activeMenu,
   .menu-open {
     background-color: white !important;
   }
+}
 
-  $inactive-color: $gray;
-
-  .slide-fade-enter-active,
-  .slide-fade-leave-active {
-    transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
+@media (prefers-color-scheme: dark) {
+  .activeMenu,
+  .menu-open {
+    background-color: $black !important;
+    color: white;
   }
+}
 
-  // .slide-fade-leave-active {
-  //   transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-  // }
+$inactive-color: $gray;
 
-  .slide-fade-enter-from,
-  .slide-fade-leave-to {
-    transform: translateX(-50px);
-    opacity: 0;
-  }
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+// .slide-fade-leave-active {
+//   transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+// }
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(-50px);
+  opacity: 0;
+}
 </style>

@@ -1,27 +1,30 @@
-import type { Measurement as IMeasurement } from '@nevo/domain-types';
-import { IsNotEmpty, IsUUID } from 'class-validator';
+import type { Measurement as IMeasurement } from '@nevo/domain-types'
+import { IsNotEmpty, IsUUID } from 'class-validator'
 
 export class Measurement implements IMeasurement {
   @IsNotEmpty()
   @IsUUID()
-  plantId!: string;
+  plantId!: string
 
   @IsNotEmpty()
-  battery!: number;
+  battery!: number
 
   @IsNotEmpty()
-  soilFertility!: number;
+  soilFertility!: number
 
   @IsNotEmpty()
-  soilMoisture!: number;
+  soilMoisture!: number
 
   @IsNotEmpty()
-  sunlight!: number;
+  sunlight!: number
 
   @IsNotEmpty()
-  temperature!: number;
+  temperature!: number
+
+  @IsNotEmpty()
+  time!: Date
 
   constructor(init?: Measurement) {
-    Object.assign(this, init);
+    Object.assign(this, init)
   }
 }

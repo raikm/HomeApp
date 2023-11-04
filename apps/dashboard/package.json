@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "@nevo/domain-types": "workspace:*",
+    "@nevo/ui": "workspace:*",
+    "@nevo/style": "workspace:*",
     "@pinia/nuxt": "^0.4.6",
     "@types/ws": "^8.5.3",
     "axios": "^0.27.2",

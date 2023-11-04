@@ -3,6 +3,7 @@ export type NevoConfig = {
   sonos: Sonos;
   homeassistant: Homeassistant;
   homeserver: Homeserver;
+  api: any,
   weather: Weather;
   google_calendar: GoogleCalendar;
   public_transport: PublicTransport;

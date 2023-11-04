@@ -41,7 +41,7 @@ import WeatherIcon from './WeatherIcon.vue'
 
 const { weatherForecast, sunset } = defineProps<{
   weatherForecast: WeatherForecast
-  sunset: boolean
+  sunset?: boolean
 }>()
 
 const currentWeather = ref<CurrentWeather>()

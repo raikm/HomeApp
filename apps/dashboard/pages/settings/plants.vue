@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { Plant } from '@nevo/domain-types'
+import { nvButton } from '@nevo/ui'
 import { ref } from 'vue'
 import { usePlantService } from '~~/services/plant'
-
 const plantService = usePlantService()
 const plants = ref<Plant[]>([])
 
@@ -12,51 +12,31 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div v-if="plants.length > 0" class="plants-sensor-list-container">
-    <div class="plant-sensor-row" v-for="plant in plants">
-      <NuxtLink :to="`editPlant/${plant.id}`">
-        <div class="plant-sensor-row-left">
-          <div class="plant-sensor-row-name">{{ plant.name ?? 'Undefined' }}</div>
-          <div class="plant-sensor-row-room">{{ plant.location?.name }}</div>
-        </div>
-      </NuxtLink>
-      <div class="plant-sensor-row-right">
-        <div class="plant-sensor-row-version">
+  <h3>Plant Sensors</h3>
+  <div v-if="plants.length > 0" class="list-container">
+    <NuxtLink v-for="plant in plants" class="list-row" :to="`editPlant/${plant.id}`">
+      <div class="list-row-left">
+        <div class="list-row-name">{{ plant.name ?? 'Undefined' }}</div>
+        <div class="list-row-room">{{ plant.location?.name }}</div>
+      </div>
+      <div class="list-row-right">
+        <div class="list-row-version">
           {{ plant.version }}
         </div>
       </div>
-      <div class="plant-sensor-row-details-icon">〉</div>
-    </div>
+      <div class="list-row-details-icon">〉</div>
+    </NuxtLink>
 
-    <div id="add-new-plant-sensor-row"><NuxtLink to="addPlant">+ Add new Plant</NuxtLink></div>
+    <div class="add-new-entry-row"><NuxtLink to="addPlant">+ Add new Plant</NuxtLink></div>
   </div>
   <div class="empty-list-container" v-else>
     <div class="empty-list-info">
       <h3>No plants added yet</h3>
-      <button><NuxtLink to="addPlant">+ Add new Plant</NuxtLink></button>
+      <nv-button><NuxtLink to="addPlant">+ Add new Plant</NuxtLink></nv-button>
     </div>
   </div>
 </template>
 
 <style lang="scss">
-#add-new-plant-sensor-row {
-  display: grid;
-  align-content: center;
-
-  a {
-    text-decoration: none;
-    color: #9604ff8a;
-  }
-}
-
-.empty-list-container {
-  display: grid;
-  height: 100%;
-  place-items: center;
-}
-
-.empty-list-info {
-  display: grid;
-  place-items: center;
-}
+@import '@nevo/style/variables.scss';
 </style>

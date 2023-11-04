@@ -1,5 +1,6 @@
 {
-  "author": "",
+  "name": "@nevo/domain-types",
+  "author": "Raik Müller <mail@raik-mueller.com>",
   "dependencies": {
     "type-fest": "3.5.7"
   },
@@ -14,10 +15,11 @@
   "files": [
     "/dist"
   ],
-  "keywords": [],
+  "keywords": [
+    "nevo"
+  ],
   "license": "ISC",
   "main": "dist/index.js",
-  "name": "@nevo/domain-types",
   "private": true,
   "scripts": {
     "build": "rimraf ./dist && tsc -p tsconfig.lib.json"
