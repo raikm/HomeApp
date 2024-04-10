@@ -1,7 +1,7 @@
 <template>
   <div id="menu-main-wrapper">
-    <div id="menu-main">
-      <Transition name="slide-fade">
+    <!-- <div id="menu-main">
+    <Transition name="slide-fade">
         <div v-if="!showMenu" class="menu-trigger menu-open bounce-button" @click="showMenu = true">
           <div>◌</div>
         </div>
@@ -83,7 +83,7 @@
           </div>
         </div>
       </Transition>
-    </div>
+    </div> -->
     <!-- v-slot for persons -->
     <div id="settings">
       <div

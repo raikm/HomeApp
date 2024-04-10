@@ -11,7 +11,7 @@
   "main": "./src/components/index.ts",
   "types": "./src/components/index.ts",
   "dependencies": {
-    "@nevo/style": "workspace:*"
+    "@nevo/style": "*"
   },
   "devDependencies": {
     "@types/node": "18.11.18",

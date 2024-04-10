@@ -9,7 +9,7 @@
   },
   "license": "ISC",
   "dependencies": {
-    "@nevo/domain-types": "workspace:*",
+    "@nevo/domain-types": "*",
     "@types/es6-promise": "^3.3.0",
     "install": "^0.13.0",
     "miflora": "^1.0.6",

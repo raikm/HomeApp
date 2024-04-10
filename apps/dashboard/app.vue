@@ -95,13 +95,13 @@ body {
 #header {
   width: $total-width;
   display: grid;
-  padding: 1rem;
+  padding: 0 1rem;
   align-items: center;
 }
 #main {
   display: grid;
   // grid-template-columns: auto auto;
-  padding: 1rem;
+  padding: 0 1rem;
   height: 100%;
   min-width: $total-width;
 }
