@@ -78,7 +78,7 @@ export class PlantService {
       ignoreUnknown: false
     }
     let result = (await miflora.discover(opts)) as MiFloraDevice[]
-
+    console.log(await miflora)
     result = result.map((d) => {
       const { name, address, lastDiscovery, isConnected, type } = d
       return { name, address, lastDiscovery, isConnected, type }

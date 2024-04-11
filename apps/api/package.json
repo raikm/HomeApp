@@ -6,8 +6,16 @@
   "private": true,
   "license": "UNLICENSED",
   "type": "module",
+  "main": "./dist/main.js",
+  "files": [
+    "./dist/"
+  ],
+  "workspaces": [
+    "../../../packages/*"
+  ],
   "scripts": {
-    "build": "nest build",
+    "build": "nest build; npm run postbuild",
+    "postbuild": "cp package.json dist/package.json && cd dist && npm install --only=production",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "dev": "nest start --debug --watch",
