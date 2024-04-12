@@ -1,4 +1,4 @@
-import type { Measurement as IMeasurement } from '@nevo/domain-types'
+import type { Measurement as IMeasurement } from '@raikm/domain-types'
 import { IsNotEmpty, IsUUID } from 'class-validator'
 
 export class Measurement implements IMeasurement {

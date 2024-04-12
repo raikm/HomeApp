@@ -1,4 +1,4 @@
-import type { MeasurementRange as IMeasurementRange, MeasurementType } from '@nevo/domain-types'
+import type { MeasurementRange as IMeasurementRange, MeasurementType } from '@raikm/domain-types'
 import { IsNotEmpty, IsUUID } from 'class-validator'
 
 export class MeasurementRange implements IMeasurementRange {

@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "nuxt": "3.2.0",
-    "@nevo/domain-types": "*",
+    "@raikm/domain-types": "*",
     "@nevo/ui": "*",
     "@nevo/style": "*",
     "@pinia/nuxt": "^0.4.6",

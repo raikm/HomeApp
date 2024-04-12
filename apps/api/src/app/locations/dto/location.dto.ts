@@ -1,18 +1,18 @@
-import { type Location as ILocation } from '@nevo/domain-types';
-import { IsNotEmpty, IsNumber, IsUUID } from 'class-validator';
+import { type Location as ILocation } from '@raikm/domain-types'
+import { IsNotEmpty, IsNumber, IsUUID } from 'class-validator'
 
 export class Location implements ILocation {
   @IsUUID()
-  id!: string;
+  id!: string
 
   @IsNotEmpty()
-  name!: string;
+  name!: string
 
   @IsNotEmpty()
   @IsNumber()
-  floor!: number;
+  floor!: number
 
   constructor(init?: Location) {
-    Object.assign(this, init);
+    Object.assign(this, init)
   }
 }

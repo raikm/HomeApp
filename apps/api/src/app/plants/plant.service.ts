@@ -6,7 +6,7 @@ import { Repository } from 'typeorm'
 import { LocationEntity } from '../locations/entities/location.entity.js'
 import { Plant, PlantCreationParameters, PlantUpdateParameters } from './dto/index.js'
 
-import { MiFloraDevice } from '@nevo/domain-types'
+import { MiFloraDevice } from '@raikm/domain-types'
 
 // @ts-ignore
 import miflora from 'miflora'

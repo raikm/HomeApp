@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Location, Plant } from '@nevo/domain-types'
+import { Location, Plant } from '@raikm/domain-types'
 import { usePlantService } from '~~/services/plant'
 import PlantCard from './PlantCard.vue'
 

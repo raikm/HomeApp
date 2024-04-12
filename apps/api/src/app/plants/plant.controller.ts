@@ -9,7 +9,7 @@ import {
   Patch,
   Post
 } from '@nestjs/common'
-import { MiFloraDevice } from '@nevo/domain-types'
+import { MiFloraDevice } from '@raikm/domain-types'
 import { Plant, PlantCreationParameters, PlantUpdateParameters } from './dto/index.js'
 import { PlantService } from './plant.service.js'
 

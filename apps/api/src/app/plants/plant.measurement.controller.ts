@@ -1,5 +1,5 @@
 import { Body, Controller, Get, HttpCode, Param, ParseUUIDPipe, Patch, Post } from '@nestjs/common'
-import { MeasurementType } from '@nevo/domain-types'
+import { MeasurementType } from '@raikm/domain-types'
 import { Measurement } from './dto/plant.measurement.dto.js'
 import { PlantMeasurementHistoryParameters } from './dto/plant.measurement.history.js'
 import { MeasurementRangeCreationParameters } from './dto/plant.measurementRange.create.js'

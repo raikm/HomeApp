@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Location, MiFloraDevice, PlantCreationParameters } from '@nevo/domain-types'
+import { Location, MiFloraDevice, PlantCreationParameters } from '@raikm/domain-types'
 import { nvButton, nvInput, nvSelect } from '@nevo/ui'
 
 import { usePlantService } from '~~/services/plant'

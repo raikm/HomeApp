@@ -1,4 +1,4 @@
-import { MeasurementType } from '@nevo/domain-types'
+import { MeasurementType } from '@raikm/domain-types'
 import { IsNotEmpty } from 'class-validator'
 import {
   Column,

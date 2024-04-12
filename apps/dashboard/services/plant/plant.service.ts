@@ -5,7 +5,7 @@ import {
   Plant,
   PlantCreationParameters,
   PlantUpdateParameters
-} from '@nevo/domain-types'
+} from '@raikm/domain-types'
 import axios from 'axios'
 import config from '../../../../config.json'
 

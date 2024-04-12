@@ -1,11 +1,9 @@
-import type { PlantMeasurementHistoryParameters as IPlantMeasurementHistoryParameters } from '@nevo/domain-types';
-import { IsNotEmpty } from 'class-validator';
+import type { PlantMeasurementHistoryParameters as IPlantMeasurementHistoryParameters } from '@raikm/domain-types'
+import { IsNotEmpty } from 'class-validator'
 
-export class PlantMeasurementHistoryParameters
-  implements IPlantMeasurementHistoryParameters
-{
+export class PlantMeasurementHistoryParameters implements IPlantMeasurementHistoryParameters {
   @IsNotEmpty()
-  start!: Date;
+  start!: Date
   @IsNotEmpty()
-  end!: Date;
+  end!: Date
 }

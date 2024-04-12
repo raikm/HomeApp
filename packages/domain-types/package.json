@@ -1,5 +1,5 @@
 {
-  "name": "@nevo/domain-types",
+  "name": "@raikm/domain-types",
   "author": "Raik Müller <mail@raik-mueller.com>",
   "dependencies": {
     "type-fest": "3.5.7"
