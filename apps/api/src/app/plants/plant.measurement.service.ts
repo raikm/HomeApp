@@ -34,20 +34,9 @@ export class MeasurementService {
       order: { datetime: 'DESC' }
     })
 
-    const soilFertility = await this.measurementRepository.findOne({
-      where: { type: MeasurementType.SOILFERTILITY, plant: plant },
-      order: { datetime: 'DESC' }
-    })
-
-    const soilMoisture = await this.measurementRepository.findOne({
-      where: { type: MeasurementType.SOILMOISTURE, plant: plant },
-      order: { datetime: 'DESC' }
-    })
-
-    const sunlight = await this.measurementRepository.findOne({
-      where: { type: MeasurementType.SUNLIGHT, plant: plant },
-      order: { datetime: 'DESC' }
-    })
+    const soilFertilityPercentage = await this.calculateSoilFertilityPercentage(plant)
+    const soilMoisturePercentage = await this.calculateSoilMoisturePercentage(plant)
+    const sunlightPercentage = await this.calculateSunlightPercentage(plant)
 
     const temperature = await this.measurementRepository.findOne({
       where: { type: MeasurementType.TEMPERATURE, plant: plant },
@@ -56,9 +45,9 @@ export class MeasurementService {
 
     if (
       battery == null ||
-      soilFertility == null ||
-      soilMoisture == null ||
-      sunlight == null ||
+      soilFertilityPercentage == null ||
+      soilMoisturePercentage == null ||
+      sunlightPercentage == null ||
       temperature == null
     ) {
       throw new BadRequestException()
@@ -67,11 +56,11 @@ export class MeasurementService {
     return new Measurement({
       plantId: plantId,
       battery: battery.value,
-      soilFertility: soilFertility.value,
-      soilMoisture: soilMoisture.value,
-      sunlight: sunlight.value,
+      soilFertility: soilFertilityPercentage,
+      soilMoisture: soilMoisturePercentage,
+      sunlight: sunlightPercentage,
       temperature: temperature.value,
-      time: temperature.datetime
+      datetime: temperature.datetime
     })
   }
 
@@ -142,7 +131,7 @@ export class MeasurementService {
           soilMoisture: soilMoisture[index].value,
           sunlight: sunlight[index].value,
           temperature: temperature[index].value,
-          time: temperature[index].datetime
+          datetime: temperature[index].datetime
         })
       )
     }
@@ -215,12 +204,9 @@ export class MeasurementService {
     await this.measurementRepository.save(measurement)
   }
 
-  async getMeasurementRange(
-    plantId: string,
-    type: MeasurementType
-  ): Promise<MeasurementRange | null> {
+  async getMeasurementRange(id: string, type: MeasurementType): Promise<MeasurementRange | null> {
     const plant = await this.plantRepository.findOneBy({
-      id: plantId
+      id: id
     })
 
     if (!plant) {
@@ -241,7 +227,7 @@ export class MeasurementService {
       unit: measurementRangeEntity.unit,
       min: measurementRangeEntity.min,
       max: measurementRangeEntity.max,
-      plantId: measurementRangeEntity.plant!.id
+      plantId: plant!.id
     })
   }
 
@@ -257,7 +243,7 @@ export class MeasurementService {
       throw new BadRequestException()
     }
 
-    const exisitngMeasurementRange = this.measurementRangeRepository.findOne({
+    const exisitngMeasurementRange = await this.measurementRangeRepository.findOne({
       where: { type: measurementRange.type, plant: plant }
     })
 
@@ -270,10 +256,75 @@ export class MeasurementService {
         unit: measurementRange.unit,
         plant: plant
       })
+      console.log(_measurementRange)
       await this.measurementRangeRepository.save(_measurementRange)
     } else {
       const updatedMeasurementRange = Object.assign({}, exisitngMeasurementRange, measurementRange)
+      console.log('updatedMeasurementRange', updatedMeasurementRange)
       await this.measurementRangeRepository.save(updatedMeasurementRange)
     }
+  }
+
+  private async calculateSoilFertilityPercentage(plant: PlantEntity): Promise<number> {
+    const soilFertilityRaw = await this.measurementRepository.findOne({
+      where: { type: MeasurementType.SOILFERTILITY, plant: plant },
+      order: { datetime: 'DESC' }
+    })
+
+    const soilFertilityRange = await this.measurementRangeRepository.findOne({
+      where: { type: MeasurementType.SOILFERTILITY, plant: plant }
+    })
+
+    if (soilFertilityRaw == null || soilFertilityRange == null) {
+      return 0
+    }
+
+    return this.calculatePercentage(
+      soilFertilityRaw!.value,
+      soilFertilityRange!.min,
+      soilFertilityRange!.max
+    )
+  }
+
+  private async calculateSoilMoisturePercentage(plant: PlantEntity): Promise<number> {
+    const soilMoistureRaw = await this.measurementRepository.findOne({
+      where: { type: MeasurementType.SOILMOISTURE, plant: plant },
+      order: { datetime: 'DESC' }
+    })
+
+    const soilMoistureRange = await this.measurementRangeRepository.findOne({
+      where: { type: MeasurementType.SOILMOISTURE, plant: plant }
+    })
+
+    if (soilMoistureRaw == null || soilMoistureRange == null) {
+      return 0
+    }
+
+    return this.calculatePercentage(
+      soilMoistureRaw!.value,
+      soilMoistureRange!.min,
+      soilMoistureRange!.max
+    )
+  }
+
+  private async calculateSunlightPercentage(plant: PlantEntity): Promise<number> {
+    const sunlightRaw = await this.measurementRepository.findOne({
+      where: { type: MeasurementType.SUNLIGHT, plant: plant },
+      order: { datetime: 'DESC' }
+    })
+
+    const sunlightRange = await this.measurementRangeRepository.findOne({
+      where: { type: MeasurementType.SUNLIGHT, plant: plant }
+    })
+
+    if (sunlightRaw == null || sunlightRange == null) {
+      return 0
+    }
+
+    return this.calculatePercentage(sunlightRaw!.value, sunlightRange!.min, sunlightRange!.max)
+  }
+
+  private calculatePercentage(value: number, min: number, max: number) {
+    return ((value - min) / (max - min)) * 100
   }
 }

@@ -1,4 +1,4 @@
-ARG NODE_VERSION=20.12.1
+ARG NODE_VERSION=20.12.2
 
 FROM node:${NODE_VERSION}-slim as base
 
@@ -18,34 +18,21 @@ RUN apt-get update && \
 ENV PYTHON python3
 ENV PYTHON_PATH /usr/bin/python3
 
-
 # Build
 FROM base as build
-
-# Copy root package.json and lockfile
-#COPY ../../package.json /usr/src/app/
-#COPY ../../package-lock.json /usr/src/app/
 
 # Copy the package.json
 COPY ./package.json /usr/src/app/dist/package.json
 
-RUN npm install
-
 COPY . .
-
-# RUN npm run build
-# RUN npm prune
 
 # Run
 FROM base
 
 ENV PORT=$PORT
 
-RUN npm install -g node-gyp
-RUN npm install @abandonware/bluetooth-hci-socket
-
 COPY ./dist /usr/src/app/dist
-COPY ../../node_modules /usr/src/app/dist/node_modules
+# COPY .dist/node_modules /usr/src/app/dist/node_modules
 # Optional, only needed if you rely on unbundled dependencies
 # COPY --from=build /src/node_modules /src/node_modules
 

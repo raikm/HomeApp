@@ -91,6 +91,7 @@ class MeasurementEntity {
   unit!: string
 
   @IsNotEmpty()
+  @Column({ type: 'datetime' })
   datetime!: Date
 
   @ManyToOne(() => PlantEntity, (plant) => plant.id)

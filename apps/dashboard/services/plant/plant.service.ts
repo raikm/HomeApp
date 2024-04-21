@@ -1,5 +1,6 @@
 import {
   Location,
+  Measurement,
   MeasurementRange,
   MiFloraDevice,
   Plant,
@@ -33,6 +34,13 @@ export class PlantService {
     await axios.patch(`${config.api.baseUrl}/api/plants/${id}/addMeasurementRange`, parameters)
   }
 
+  async getMeasurementRange(id: string, type: string): Promise<MeasurementRange | null> {
+    const response = await axios.get<MeasurementRange>(
+      `${config.api.baseUrl}/api/plants/${id}/getMeasurementRange/${type}`
+    )
+    return response.data
+  }
+
   async blinking(address: string): Promise<void> {
     const response = await axios.get<void>(`${config.api.baseUrl}/api/plants/blinking/${address}`)
 
@@ -60,5 +68,13 @@ export class PlantService {
     const response = await axios.get<Location[]>(`${config.api.baseUrl}/api/location/`)
 
     return response.data
+  }
+
+  async getLastMeasurements(id: string): Promise<Measurement | null> {
+    const response = await axios.get<Measurement>(
+      `${config.api.baseUrl}/api/plants/${id}/lastMeasurements`
+    )
+
+    return response?.data ?? null
   }
 }

@@ -6,9 +6,7 @@
         :style="{
           width:
             //if value over minimum and at least 2% then show bar
-            (value - valueMinBorder > 0 && (value / valueMaxBorder) * 100 > 2
-              ? (value / valueMaxBorder) * 100
-              : 0) + '%',
+            value + '%',
           backgroundColor: barColor
         }"
       ></div>
@@ -19,8 +17,6 @@
 <script lang="ts" setup>
 defineProps({
   barColor: { type: String, required: true },
-  valueMinBorder: { type: Number, required: true },
-  valueMaxBorder: { type: Number, required: true },
   value: { type: Number, required: true }
 })
 </script>

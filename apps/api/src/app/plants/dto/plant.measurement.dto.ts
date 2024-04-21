@@ -22,7 +22,7 @@ export class Measurement implements IMeasurement {
   temperature!: number
 
   @IsNotEmpty()
-  time!: Date
+  datetime!: Date
 
   constructor(init?: Measurement) {
     Object.assign(this, init)

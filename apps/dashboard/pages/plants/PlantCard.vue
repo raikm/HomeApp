@@ -2,7 +2,7 @@
   <div v-if="measurements" class="plant-card-wrapper">
     <div class="plant-card-header">
       <div class="plant-card-name">{{ name }}</div>
-      <div v-if="measurementsOld" class="plant-card-status">⏺</div>
+      <div v-if="measurementsOld" class="plant-card-status">⬤</div>
     </div>
     <div class="plant-card-parameter">
       <div class="plant-card-parameter-humidity">
@@ -10,12 +10,10 @@
         <div class="bar-text">
           <PlantCardProgressBar
             barColor="#448cdb"
-            :valueMinBorder="50"
-            :valueMaxBorder="300"
             :value="measurements.soilMoisture"
           ></PlantCardProgressBar>
 
-          <div class="value-in-text">30%</div>
+          <div class="value-in-text">{{ measurements.soilMoisture.toFixed(0) }}%</div>
         </div>
       </div>
       <div class="plant-card-parameter-fertility">
@@ -23,11 +21,9 @@
         <div class="bar-text">
           <PlantCardProgressBar
             barColor="#d07561"
-            :valueMinBorder="50"
-            :valueMaxBorder="300"
             :value="measurements.soilFertility"
           ></PlantCardProgressBar>
-          <div class="value-in-text">80%</div>
+          <div class="value-in-text">{{ measurements.soilFertility.toFixed(0) }}%</div>
         </div>
       </div>
     </div>
@@ -35,32 +31,36 @@
 </template>
 
 <script lang="ts" setup>
-import { Measurement, MeasurementRanges } from '@raikm/domain-types'
+import { Measurement } from '@raikm/domain-types'
 import PlantCardProgressBar from './PlantCardProgressBar.vue'
+import { usePlantService } from '~~/services/plant'
 
-defineProps({
+const plantService = usePlantService()
+
+const { id } = defineProps({
   id: { type: String, required: true },
   name: { type: String, required: true }
 })
-const measurements = ref<Measurement>()
+const measurements = ref<Measurement | null>()
 
-const measurementFertilityBorders = ref<MeasurementRanges>()
-const measurementMoistureBorders = ref<MeasurementRanges>()
-const measurementSunlightBorders = ref<MeasurementRanges>()
+measurements.value = await plantService.getLastMeasurements(id)
 
-measurements.value = {
-  plantId: '1',
-  battery: 100,
-  soilFertility: 200,
-  soilMoisture: 200,
-  sunlight: 80,
-  temperature: 19,
-  time: new Date()
-}
+// measurements.value = {
+//   plantId: '1',
+//   battery: 100,
+//   soilFertility: 200,
+//   soilMoisture: 200,
+//   sunlight: 80,
+//   temperature: 19,
+//   time: new Date()
+// }
 
 // TODO correct validation
 const measurementsOld = ref(false)
-// const measurementsOld = ref(measurements.value.time >= new Date().setDate(-1) ? true : false)
+if (measurements.value) {
+  measurementsOld.value =
+    new Date(measurements.value.datetime) < new Date(Date.now() - 2 * 24 * 60 * 60 * 1000)
+}
 </script>
 
 <style lang="scss">
@@ -99,6 +99,7 @@ const measurementsOld = ref(false)
 .plant-card-status {
   justify-self: right;
   color: $red;
+  font-size: xx-small;
 }
 
 .plant-card-parameter {

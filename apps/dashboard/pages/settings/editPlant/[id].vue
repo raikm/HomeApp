@@ -21,7 +21,8 @@ const moistureRanges = ref<MeasurementRange>({
   type: MeasurementType.SOILMOISTURE,
   unit: MeasurementUnit.PERCENTAGE,
   min: 0,
-  max: 0
+  max: 0,
+  plantId: route.params.id.toString()
 })
 watch(moistureRanges.value, (newValues) => {
   savePlantMeasurementRange(newValues)
@@ -31,7 +32,8 @@ const fertilityRanges = ref<MeasurementRange>({
   type: MeasurementType.SOILFERTILITY,
   unit: MeasurementUnit.CONDUCTIVITY,
   min: 0,
-  max: 0
+  max: 0,
+  plantId: route.params.id.toString()
 })
 watch(fertilityRanges.value, (newValues) => {
   savePlantMeasurementRange(newValues)
@@ -41,7 +43,8 @@ const sunlightRanges = ref<MeasurementRange>({
   type: MeasurementType.SUNLIGHT,
   unit: MeasurementUnit.LUX,
   min: 0,
-  max: 0
+  max: 0,
+  plantId: route.params.id.toString()
 })
 watch(sunlightRanges.value, (newValues) => {
   savePlantMeasurementRange(newValues)
@@ -84,6 +87,28 @@ onMounted(async () => {
   if (plant != null) {
     plantUpdateParameters.value.name = plant.name
     plantUpdateParameters.value.location = plant.location
+
+    const currentSoilMoistureMesseaurements = await plantService.getMeasurementRange(
+      route.params.id.toString(),
+      MeasurementType.SOILMOISTURE
+    )
+    if (currentSoilMoistureMesseaurements) {
+      moistureRanges.value = currentSoilMoistureMesseaurements
+    }
+    const currentSoilFertilityMesseaurements = await plantService.getMeasurementRange(
+      route.params.id.toString(),
+      MeasurementType.SOILFERTILITY
+    )
+    if (currentSoilFertilityMesseaurements) {
+      fertilityRanges.value = currentSoilFertilityMesseaurements
+    }
+    const currentSunlightMesseaurements = await plantService.getMeasurementRange(
+      route.params.id.toString(),
+      MeasurementType.SUNLIGHT
+    )
+    if (currentSunlightMesseaurements) {
+      sunlightRanges.value = currentSunlightMesseaurements
+    }
   }
 })
 </script>
@@ -106,11 +131,17 @@ onMounted(async () => {
     <nv-select label="Room" v-model="plantUpdateParameters.location">
       <option v-for="location in locations" :value="location">{{ location.name }}</option>
     </nv-select>
-    <div class="nv-input-headline">Moisture Borders</div>
+    <div class="nv-input-headline">Moisture Borders (%)</div>
     <nv-input label="Minimum" type="number" v-model="moistureRanges.min" />
     <nv-input label="Maximum" type="number" v-model="moistureRanges.max" />
 
-    <!-- TODO other borders-->
+    <div class="nv-input-headline">Fertility Borders (µS/cm)</div>
+    <nv-input label="Minimum" type="number" v-model="fertilityRanges.min" />
+    <nv-input label="Maximum" type="number" v-model="fertilityRanges.max" />
+
+    <div class="nv-input-headline">Sunlight Borders (Lux)</div>
+    <nv-input label="Minimum" type="number" v-model="sunlightRanges.min" />
+    <nv-input label="Maximum" type="number" v-model="sunlightRanges.max" />
 
     <div class="settings-detail-sub">
       <nv-button @click="blinking">
