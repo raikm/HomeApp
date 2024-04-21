@@ -59,7 +59,8 @@ async function sendPlantDataToAPI(plantId: string | undefined, data: PlantQueryD
     soilFertility: data.sensorValues.fertility,
     soilMoisture: data.sensorValues.moisture,
     sunlight: data.sensorValues.lux,
-    temperature: data.sensorValues.temperature
+    temperature: data.sensorValues.temperature,
+    datetime: new Date()
   }
 
   console.log(
