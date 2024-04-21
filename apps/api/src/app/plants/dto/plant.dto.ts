@@ -1,4 +1,4 @@
-import { Location, type Plant as IPlant } from '@nevo/domain-types'
+import { Location, type Plant as IPlant } from '@raikm/domain-types'
 import { IsMACAddress, IsNotEmpty, IsSemVer, IsUUID } from 'class-validator'
 
 export class Plant implements IPlant {

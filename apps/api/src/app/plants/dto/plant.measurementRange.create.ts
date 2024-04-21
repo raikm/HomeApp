@@ -1,7 +1,7 @@
 import type {
   MeasurementRangeCreationParameters as IMeasurementRangeCreationParameters,
   MeasurementType
-} from '@nevo/domain-types'
+} from '@raikm/domain-types'
 import { IsNotEmpty, IsUUID } from 'class-validator'
 
 export class MeasurementRangeCreationParameters implements IMeasurementRangeCreationParameters {

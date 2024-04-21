@@ -1,4 +1,4 @@
-import { Measurement, MiFloraDevice, Plant } from '@nevo/domain-types'
+import { Measurement, MiFloraDevice, Plant } from '@raikm/domain-types'
 import fs from 'fs'
 // @ts-ignore
 import miflora from 'miflora'

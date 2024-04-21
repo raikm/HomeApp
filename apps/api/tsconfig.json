@@ -10,6 +10,7 @@
     "baseUrl": "./",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
+    "resolveJsonModule": true,
     "noImplicitAny": true,
     "isolatedModules": true,
     "outDir": "./dist",
@@ -17,9 +18,12 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
-    "target": "ESNext",
-    "types": ["node"]
+    "target": "ES2022",
+    "types": [
+      "node"
+    ]
   },
-  "include": ["./src/**/*"],
-  "exclude": ["node_modules"]
+  "include": [
+    "./src/**/*"
+  ],
 }

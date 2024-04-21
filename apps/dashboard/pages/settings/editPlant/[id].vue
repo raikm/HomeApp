@@ -5,7 +5,7 @@ import {
   MeasurementType,
   MeasurementUnit,
   PlantUpdateParameters
-} from '@nevo/domain-types'
+} from '@raikm/domain-types'
 import { nvButton, nvInput, nvSelect } from '@nevo/ui'
 import { usePlantService } from '~~/services/plant'
 const router = useRouter()

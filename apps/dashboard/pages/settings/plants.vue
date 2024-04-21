@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Plant } from '@nevo/domain-types'
+import { Plant } from '@raikm/domain-types'
 import { nvButton } from '@nevo/ui'
 import { ref } from 'vue'
 import { usePlantService } from '~~/services/plant'

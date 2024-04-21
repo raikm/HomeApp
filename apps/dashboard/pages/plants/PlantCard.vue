@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Measurement, MeasurementRanges } from '@nevo/domain-types'
+import { Measurement, MeasurementRanges } from '@raikm/domain-types'
 import PlantCardProgressBar from './PlantCardProgressBar.vue'
 
 defineProps({

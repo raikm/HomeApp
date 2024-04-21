@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { MeasurementType, MeasurementUnit } from '@nevo/domain-types'
+import { MeasurementType, MeasurementUnit } from '@raikm/domain-types'
 import { randomUUID } from 'crypto'
 import { Between, Repository } from 'typeorm'
 import { Measurement } from './dto/index.js'

@@ -6,7 +6,7 @@ import { Repository } from 'typeorm'
 import { LocationEntity } from '../locations/entities/location.entity.js'
 import { Plant, PlantCreationParameters, PlantUpdateParameters } from './dto/index.js'
 
-import { MiFloraDevice } from '@nevo/domain-types'
+import { MiFloraDevice } from '@raikm/domain-types'
 
 // @ts-ignore
 import miflora from 'miflora'
@@ -78,7 +78,7 @@ export class PlantService {
       ignoreUnknown: false
     }
     let result = (await miflora.discover(opts)) as MiFloraDevice[]
-
+    console.log(await miflora)
     result = result.map((d) => {
       const { name, address, lastDiscovery, isConnected, type } = d
       return { name, address, lastDiscovery, isConnected, type }

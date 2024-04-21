@@ -8,13 +8,13 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "nuxt": "3.2.0",
     "vite-svg-loader": "^3.6.0"
   },
   "dependencies": {
-    "@nevo/domain-types": "workspace:*",
-    "@nevo/ui": "workspace:*",
-    "@nevo/style": "workspace:*",
+    "nuxt": "3.2.0",
+    "@raikm/domain-types": "*",
+    "@nevo/ui": "*",
+    "@nevo/style": "*",
     "@pinia/nuxt": "^0.4.6",
     "@types/ws": "^8.5.3",
     "axios": "^0.27.2",

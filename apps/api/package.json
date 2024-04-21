@@ -6,8 +6,16 @@
   "private": true,
   "license": "UNLICENSED",
   "type": "module",
+  "main": "./dist/main.js",
+  "files": [
+    "./dist/"
+  ],
+  "workspaces": [
+    "../../../packages/*"
+  ],
   "scripts": {
-    "build": "nest build",
+    "build": "nest build; npm run postbuild",
+    "postbuild": "cp package.json dist/package.json && cd dist && npm install --only=production",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "dev": "nest start --debug --watch",
@@ -25,7 +33,7 @@
     "@nestjs/core": "^9.3.9",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/typeorm": "^9.0.1",
-    "@nevo/domain-types": "workspace:*",
+    "@raikm/domain-types": "*",
     "@types/cookie-parser": "^1.4.3",
     "better-sqlite3": "^8.1.0",
     "class-transformer": "^0.5.1",
