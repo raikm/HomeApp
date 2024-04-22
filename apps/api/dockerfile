@@ -32,9 +32,9 @@ FROM base
 ENV PORT=$PORT
 
 COPY ./dist /usr/src/app/dist
-# COPY .dist/node_modules /usr/src/app/dist/node_modules
-# Optional, only needed if you rely on unbundled dependencies
-# COPY --from=build /src/node_modules /src/node_modules
+
+# Install node-gyp and @abandonware/bluetooth-hci-socket
+RUN npm install -g node-gyp@10.1.0 -g @abandonware/bluetooth-hci-socket@0.5.3-12
 
 
 CMD [ "node", "dist/main.js" ]

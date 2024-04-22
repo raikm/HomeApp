@@ -65,9 +65,11 @@ export class PlantService {
   }
 
   async findAll(): Promise<Plant[]> {
-    return await this.plantRepository.find({
+    const result = await this.plantRepository.find({
       relations: ['location']
     })
+    console.log(result)
+    return result
   }
 
   async findNewNearbySensors(duration: number): Promise<MiFloraDevice[]> {

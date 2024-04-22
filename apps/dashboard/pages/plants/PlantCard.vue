@@ -13,7 +13,9 @@
             :value="measurements.soilMoisture"
           ></PlantCardProgressBar>
 
-          <div class="value-in-text">{{ measurements.soilMoisture.toFixed(0) }}%</div>
+          <div class="value-in-text">
+            {{ measurements.soilMoisture > 0 ? measurements.soilMoisture.toFixed(0) : 0 }}%
+          </div>
         </div>
       </div>
       <div class="plant-card-parameter-fertility">
@@ -21,9 +23,11 @@
         <div class="bar-text">
           <PlantCardProgressBar
             barColor="#d07561"
-            :value="measurements.soilFertility"
+            :value="measurements.soilFertility > 0 ? measurements.soilFertility : 0"
           ></PlantCardProgressBar>
-          <div class="value-in-text">{{ measurements.soilFertility.toFixed(0) }}%</div>
+          <div class="value-in-text">
+            {{ measurements.soilFertility > 0 ? measurements.soilFertility.toFixed(0) : 0 }}%
+          </div>
         </div>
       </div>
     </div>
