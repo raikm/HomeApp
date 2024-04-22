@@ -1,0 +1,48 @@
+$nevo-primary-color: #9604ff;
+$nevo-primary-color-light: #9604ff8a;
+$nevo-secondary-color: #fbc8c8;
+$nevo-secondary-color-light: #fbc8c86b;
+
+$nevo-primary-text-color: rgb(71, 71, 71);
+
+$box-width: 21rem;
+$box-padding: 0.9rem;
+$box-gap: 1rem;
+
+$standard-title-big: 50px;
+$standard-title-medium: 60%;
+
+$standard-text-big: 22px;
+$standard-text-medium: 15px;
+$standard-text-small: 10px;
+
+// Standard Colors
+$gray: rgb(142, 142, 142);
+$light-gray: rgba(238, 238, 240, 0.585);
+$light-brown: #bc5038df;
+$white: rgb(250, 250, 250);
+$white-smoke: rgb(245, 245, 245);
+$black: rgb(71, 71, 71);
+$red: #bd312d;
+$yellow: #ffe17d;
+$yellow-2: #ffc350; // a little darker
+$orange: #ffa384;
+$orange-2: #fdb441; // a little darker
+$green: #4a7277;
+$grren-alt: #83c5be;
+$blue: #007bffcc;
+
+// Standard Design Parameter
+$background-color: rgb(252, 252, 252);
+$standard-border-radius: 15px;
+$standard-space: 15px;
+
+// export for using in scripts
+:export {
+  mainBlue: $blue;
+  mainGreen: $green;
+  mainYellow: $yellow;
+  mainLightGray: $light-gray;
+  mainGray: $gray;
+  textColor: $nevo-primary-text-color;
+}

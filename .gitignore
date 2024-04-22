@@ -6,6 +6,7 @@ apps/dashboard/ios
 apps/mobile/dist
 apps/mobile
 config.json
+.turbo
 
 # local env files
 .env.local
@@ -34,7 +35,6 @@ homeapp-darwin-x64
 build/
 /dist
 dist_electron/
-
 
 # Logs
 logs
@@ -123,4 +123,7 @@ typings/
 # Webpack
 .webpack/
 
-
+.output/
+apps/api/db/sqlite.db
+apps/api/database.sqlite
+packages/domain-types/dist/

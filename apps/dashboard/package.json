@@ -1,47 +1,31 @@
 {
-  "name": "vite-vue3",
-  "version": "0.0.1",
-  "main": "src/main/index.js",
+  "private": true,
   "scripts": {
-    "serve": "vite --host",
-    "electron": "wait-on tcp:8081 && cross-env IS_DEV=true electron .",
-    "electron:pack": "electron-builder --dir",
-    "dev": "concurrently -k \"cross-env BROWSER=none npm run vite:dev\" \"npm run electron\"",
-    "electron:builder": "electron-builder",
-    "build:for:electron": "cross-env ELECTRON=true vite build",
-    "app:build": "npm run build:for:electron && npm run electron:builder"
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
   },
-  "dependencies": {},
   "devDependencies": {
-    "@vitejs/plugin-vue": "^3.1.0",
-    "electron": "20.1.3",
-    "electron-builder": "^23.3.3",
-    "typescript": "^4.8.3",
-    "vite": "^3.1.0",
-    "vue-tsc": "^0.40.13"
+    "vite-svg-loader": "^3.6.0"
   },
-  "keywords": [
-    "vite",
-    "vue",
-    "electron"
-  ],
-  "build": {
-    "appId": "com.homepanorama.app",
-    "productName": "Homepanorama",
-    "mac": {
-      "category": "public.app-category.utilities"
-    },
-    "nsis": {
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true
-    },
-    "files": [
-      "dist/**/*",
-      "src/main/**/*"
-    ],
-    "directories": {
-      "buildResources": "assets",
-      "output": "dist_electron"
-    }
+  "dependencies": {
+    "nuxt": "3.2.0",
+    "@raikm/domain-types": "*",
+    "@nevo/ui": "*",
+    "@nevo/style": "*",
+    "@pinia/nuxt": "^0.4.6",
+    "@types/ws": "^8.5.3",
+    "axios": "^0.27.2",
+    "googleapis": "^108.0.0",
+    "home-assistant-js-websocket": "^8.0.0",
+    "nuxt-vue3-google-signin": "^0.0.5",
+    "pinia": "^2.0.30",
+    "qs": "^6.11.0",
+    "sass": "^1.54.9",
+    "socket.io-client": "^4.5.4",
+    "vue": "^3.2.39",
+    "vue3-google-signin": "^1.2.1"
   }
 }

@@ -1,0 +1,8 @@
+@import './variables.scss';
+
+@media (prefers-color-scheme: dark) {
+  .main-box {
+    background-color: $black;
+    backdrop-filter: blur(10px);
+  }
+}

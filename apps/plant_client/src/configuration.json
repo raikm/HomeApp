@@ -1,0 +1,8 @@
+{
+  "floor": 1,
+  "api": {
+    "address": "http://192.168.1.157",
+    "port": 5001,
+    "prefix": "api"
+  }
+}

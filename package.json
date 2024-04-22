@@ -1,62 +1,24 @@
 {
   "name": "nevo",
   "version": "0.0.0",
-  "license": "MIT",
-  "scripts": {
-    "dashboard": "nx dev --project=dashboard",
-    "vite": "nx run dashboard:serve",
-    "mobile": "nx dev --project=mobile",
-    "build-dashboard": "nx app:build --project=dashboard",
-    "build-mobile": "nx build --project=mobile",
-    "test": "nx test"
-  },
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md,vue}\""
+  },
   "devDependencies": {
-    "@angular-devkit/schematics": "^13.2.5",
-    "@capacitor/cli": "^3.4.3",
-    "@nrwl/cli": "13.8.3",
-    "@nrwl/nx-cloud": "latest",
-    "@nrwl/tao": "13.8.3",
-    "@nrwl/workspace": "13.8.3",
-    "@types/gapi": "^0.0.41",
-    "@types/hafas-client": "^5.12.1",
-    "@types/node": "^16.11.7",
-    "@types/qs": "^6.9.7",
-    "@types/websocket": "^1.0.4",
-    "@vitejs/plugin-vue": "^2.3.1",
-    "@vue/compiler-sfc": "^3.2.31",
-    "concurrently": "^6.2.1",
-    "cross-env": "^7.0.3",
-    "node-sass": "^7.0.0",
-    "nx-plugin-vite": "^1.3.2",
-    "prettier": "^2.5.1",
-    "sass-loader": "^12.2.0",
-    "stylelint": "^14.5.3",
-    "stylelint-config-prettier": "^9.0.3",
-    "stylelint-config-standard": "^25.0.0",
-    "typescript": "~4.5.2",
-    "vite": "^2.9.13",
-    "vite-svg-loader": "^2.2.0",
-    "vue-tsc": "^0.33.9",
-    "wait-on": "^6.0.0"
+    "prettier": "latest",
+    "turbo": "latest"
   },
-  "dependencies": {
-    "@capacitor/core": "^4.2.0",
-    "@types/gapi.auth2": "^0.0.56",
-    "axios": "^0.27.2",
-    "hafas-client": "^5.25.0",
-    "home-assistant-js-websocket": "^5.11.1",
-    "qs": "^6.11.0",
-    "sass": "^1.54.9",
-    "socket.io-client": "^4.5.2",
-    "vue": "^3.2.39",
-    "vue-axios": "^3.2.5",
-    "vue-gapi": "^2.1.2",
-    "vue-router": "4.1.5",
-    "vuex": "^4.0.2"
+  "engines": {
+    "node": ">=14.0.0"
   },
-  "keywords": [
-    "vite",
-    "vue"
-  ]
+  "dependencies": {},
+  "packageManager": "npm@9.5.0"
 }

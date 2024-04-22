@@ -1,0 +1,376 @@
+@import './variables.scss';
+
+body {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-size: 16px;
+
+  // height: 100vh;
+}
+
+#dashboard {
+  //https://webgradients.com/
+  // background-image: linear-gradient(120deg, #faf4e1 0%, #eed8b2 100%);
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+h6 {
+  margin: 0;
+  font-weight: 400;
+  color: $nevo-primary-text-color;
+  opacity: 70%;
+}
+
+.page-header,
+.page-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  width: 100%;
+  margin: $standard-space 0;
+}
+
+.page-header > div {
+  margin: 0 0.5rem;
+}
+
+.box {
+  border-radius: $standard-border-radius;
+  padding: $box-padding;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  height: 12rem;
+  width: $box-width;
+}
+
+@media (prefers-color-scheme: light) {
+  .main-box {
+    background-color: rgb(255, 255, 255);
+    backdrop-filter: blur(10px);
+  }
+}
+
+.main-info-content {
+  margin: 2% 0;
+}
+
+.main-info-icon-container {
+  float: left;
+  height: 2.5vh;
+  width: 2.5vh;
+  background-color: white;
+
+  .info-icon {
+    margin: 10%;
+    height: 80%;
+    width: 80%;
+  }
+
+  .info-icon-text {
+    font-weight: 400;
+    height: 100%;
+    // width: 100%;
+    font-size: $standard-title-big;
+    line-height: 80%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.main-info-header {
+  height: 20%;
+  // margin-bottom: 1.6%;
+}
+
+.main-info-title {
+  font-size: medium;
+}
+
+.main-box-body {
+  height: 80%;
+}
+
+.main-info-header-medium {
+  // display: inline-flex;
+  font-size: 1.5em;
+  //line-height: 3vh;
+  margin-bottom: 1.6%;
+  font-weight: 500;
+  // overflow: hidden;
+}
+
+.main-info-title-big {
+  font-size: 1.5rem;
+}
+
+.click-element:active {
+  animation: bounce-in 0.5s;
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(0.95);
+  }
+
+  80% {
+    transform: scale(1.03);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.small-icon {
+  height: 2vh;
+  width: 2vh;
+}
+
+.svg-icon-container {
+  height: 2vh;
+  width: 2vh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.svg-icon-container > svg {
+  width: 100%;
+  height: 65%;
+}
+
+.title-1 {
+  font-weight: bold;
+  font-size: 2.8vh;
+  height: 3vh;
+  line-height: 3vh;
+}
+
+.title-2 {
+  font-weight: bold;
+  font-size: 1.9vh;
+  height: 2.1vh;
+  line-height: 2.1vh;
+  margin-bottom: $standard-space;
+}
+
+.title-3 {
+  font-weight: bold;
+  font-size: 1.5vh;
+  height: 1.5vh;
+  line-height: 1.5vh;
+  margin-bottom: $standard-space;
+}
+
+.click-element-hover:hover {
+  background-color: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(10px);
+  border-width: 0;
+  border-radius: 10px;
+  border-style: solid;
+  cursor: none;
+}
+
+@mixin borderstyle {
+}
+
+.service-info {
+  display: grid;
+  place-items: center;
+  height: 50%;
+}
+
+.widget-regular-header {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.refresh-button {
+  display: grid;
+  place-items: center;
+}
+
+@-webkit-keyframes rotating
+
+/* Safari and Chrome */ {
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+
+  to {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+}
+
+.rotating {
+  -webkit-animation: rotating 1s linear infinite;
+  -moz-animation: rotating 1s linear infinite;
+  -ms-animation: rotating 1s linear infinite;
+  -o-animation: rotating 1s linear infinite;
+  animation: rotating 1s linear infinite;
+}
+
+.refresh-button:hover {
+  background-color: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(10px);
+  border-width: 0;
+  cursor: none;
+}
+
+//
+
+.list-container {
+  padding: 0.8rem;
+  border-radius: $standard-border-radius;
+}
+
+@media (prefers-color-scheme: light) {
+  .list-container {
+    background-color: white;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .list-container {
+    background-color: black;
+  }
+}
+
+.list-container > div,
+.list-container > a {
+  border-bottom: 1px solid lightgray;
+  padding-left: 15px;
+  height: 4vh;
+}
+
+.list-container > div:last-child,
+.list-container > a:last-child {
+  border: none;
+}
+
+.list-row {
+  display: grid;
+  grid-template-columns: 90% auto auto;
+
+  text-decoration: none;
+  color: $nevo-primary-text-color;
+  min-height: 2.8rem;
+  padding: 0.3rem 1rem;
+  .list-row-left {
+    .plant-sensor-row-room {
+      font-size: small;
+      color: $nevo-primary-text-color;
+    }
+  }
+
+  .list-row-right {
+    justify-self: right;
+    align-self: center;
+
+    .list-row-version {
+      font-size: medium;
+      color: $nevo-primary-text-color;
+    }
+  }
+
+  .list-row-details-icon {
+    justify-self: right;
+    align-self: center;
+    color: $nevo-primary-text-color;
+  }
+}
+
+.add-new-entry-row {
+  display: grid;
+  align-content: center;
+  min-height: 2rem;
+  a {
+    text-decoration: none;
+    color: $nevo-primary-color-light;
+  }
+}
+
+.empty-list-container {
+  display: grid;
+  height: 100%;
+  place-items: center;
+}
+
+.empty-list-info {
+  display: grid;
+  place-items: center;
+}
+
+.nv-input-headline {
+  font-size: 0.8rem;
+  margin-left: 10px;
+}
+
+.bounce-button:active {
+  transition: 0s;
+  animation: press 0.4s 1 linear;
+}
+
+@keyframes press {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.92);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.settings-header {
+  display: inline-flex;
+  gap: 1rem;
+  align-items: center;
+}

@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "alwaysStrict": true,
+    "declaration": true,
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "importHelpers": true,
+    "incremental": true,
+    "module": "ESNext",
+    "moduleResolution": "Node16",
+    "outDir": "./dist",
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "ESNext"
+  }
+}

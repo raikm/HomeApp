@@ -1,0 +1,7 @@
+version: '3'
+services:
+  dashboard:
+    build:
+      context: .
+    ports:
+      - '9000:9000'

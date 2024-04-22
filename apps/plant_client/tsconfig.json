@@ -1,0 +1,38 @@
+{
+  "ts-node": {
+    "esm": true,
+    // It is faster to skip typechecking.
+    // Remove if you want ts-node to do typechecking.
+    "transpileOnly": true,
+    "files": true,
+    "compilerOptions": {
+      // compilerOptions specified here will override those declared below,
+      // but *only* in ts-node.  Useful if you want ts-node and tsc to use
+      // different options with a single tsconfig.json.
+    }
+  },
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "alwaysStrict": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "incremental": true,
+    "baseUrl": "./",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "noImplicitAny": true,
+    "isolatedModules": true,
+    "outDir": "./dist",
+    "removeComments": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "ESNext",
+    "types": ["node"],
+    "lib": ["es2015", "DOM"]
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules"]
+}

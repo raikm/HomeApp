@@ -1,0 +1,11 @@
+meta {
+  name: call 'discover' plant sensors
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://192.168.1.217:5001/api/plants/discover/5000
+  body: none
+  auth: none
+}
