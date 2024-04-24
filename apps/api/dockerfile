@@ -26,6 +26,7 @@ COPY ./package.json /usr/src/app/dist/package.json
 
 COPY . .
 
+RUN npm install -g node-gyp@10.1.0 -g @abandonware/bluetooth-hci-socket@0.5.3-12
 # Run
 FROM base
 
@@ -34,7 +35,6 @@ ENV PORT=$PORT
 COPY ./dist /usr/src/app/dist
 
 # Install node-gyp and @abandonware/bluetooth-hci-socket
-RUN npm install -g node-gyp@10.1.0 -g @abandonware/bluetooth-hci-socket@0.5.3-12
 
 
 CMD [ "node", "dist/main.js" ]

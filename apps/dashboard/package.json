@@ -1,5 +1,10 @@
 {
+  "name": "dashboard",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",

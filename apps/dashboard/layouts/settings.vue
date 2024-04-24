@@ -10,6 +10,9 @@
       <div class="menu-link">
         <NuxtLink :to="{ path: '/settings/plants' }"> Plants </NuxtLink>
       </div>
+      <div class="menu-link">
+        <NuxtLink :to="{ path: '/settings/locations' }"> Locations </NuxtLink>
+      </div>
     </div>
     <div class="menu main-box settings-details">
       <slot />
