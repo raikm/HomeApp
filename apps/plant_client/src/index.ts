@@ -29,19 +29,25 @@ async function readPlantData(plants: Plant[]) {
   const addresses = plants.map((p) => p.address)
 
   const opts = {
-    duration: 5000,
+    duration: 20000,
     ignoreUnknown: true,
     addresses: addresses
   }
 
   const devices = (await miflora.discover(opts)) as MiFloraDevice[]
   console.log(`${devices.length} found`)
+
   for (const device of devices) {
     const plant = plants.find((p) => p.address === device.address)
     console.log(`read data from ${plant?.name}: ${device.address}`)
-    const data = (await (device as any).query()) as PlantQueryData
-    console.log(data)
-    await sendPlantDataToAPI(plant?.id, data)
+
+    try {
+      const data = (await (device as any).query()) as PlantQueryData
+      console.log(data)
+      await sendPlantDataToAPI(plant?.id, data)
+    } catch (error) {
+      console.error('Error occurred while querying device:', error)
+    }
   }
 
   return process.exit(0)
@@ -79,8 +85,8 @@ async function sendPlantDataToAPI(plantId: string | undefined, data: PlantQueryD
       body: JSON.stringify(measurement)
     }
   )
-  console.log(`Nachrichten Sendungstatus: ${response.status} ${response.statusText}`)
-  response.json().then((body) => console.log(body))
+  console.log(`Nachrichten Sendungstatus: ${response}`)
+  // response.json().then((body) => console.log(body))
 }
 
 const configuration = JSON.parse(fs.readFileSync('./src/configuration.json', 'utf8'))

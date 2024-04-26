@@ -10,7 +10,7 @@
         <div class="bar-text">
           <PlantCardProgressBar
             barColor="#448cdb"
-            :value="measurements.soilMoisture"
+            :value="measurements.soilMoisture > 0 ? measurements.soilMoisture : 0"
           ></PlantCardProgressBar>
 
           <div class="value-in-text">
@@ -72,11 +72,11 @@ if (measurements.value) {
 
 .plant-card-wrapper {
   width: $box-width / 2;
-  height: 4rem;
+  height: 5rem;
   background-color: $white;
   border-radius: $standard-border-radius;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
   padding: 8px;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 }
@@ -90,6 +90,7 @@ if (measurements.value) {
 
 .plant-card-name {
   font-weight: bold;
+  word-wrap: break-word;
 }
 
 .plant-card-battery {

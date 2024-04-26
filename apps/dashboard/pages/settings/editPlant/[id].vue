@@ -14,6 +14,7 @@ const plantService = usePlantService()
 
 const plantUpdateParameters = ref<PlantUpdateParameters>({ name: '' })
 watch(plantUpdateParameters.value, () => {
+  console.log(plantUpdateParameters.value)
   savePlantDetails()
 })
 
@@ -24,6 +25,7 @@ const moistureRanges = ref<MeasurementRange>({
   max: 0,
   plantId: route.params.id.toString()
 })
+
 watch(moistureRanges.value, (newValues) => {
   savePlantMeasurementRange(newValues)
 })
@@ -93,21 +95,24 @@ onMounted(async () => {
       MeasurementType.SOILMOISTURE
     )
     if (currentSoilMoistureMesseaurements) {
-      moistureRanges.value = currentSoilMoistureMesseaurements
+      moistureRanges.value.min = currentSoilMoistureMesseaurements.min
+      moistureRanges.value.max = currentSoilMoistureMesseaurements.max
     }
     const currentSoilFertilityMesseaurements = await plantService.getMeasurementRange(
       route.params.id.toString(),
       MeasurementType.SOILFERTILITY
     )
     if (currentSoilFertilityMesseaurements) {
-      fertilityRanges.value = currentSoilFertilityMesseaurements
+      fertilityRanges.value.min = currentSoilFertilityMesseaurements.min
+      fertilityRanges.value.max = currentSoilFertilityMesseaurements.max
     }
     const currentSunlightMesseaurements = await plantService.getMeasurementRange(
       route.params.id.toString(),
       MeasurementType.SUNLIGHT
     )
     if (currentSunlightMesseaurements) {
-      sunlightRanges.value = currentSunlightMesseaurements
+      sunlightRanges.value.min = currentSunlightMesseaurements.min
+      sunlightRanges.value.max = currentSunlightMesseaurements.max
     }
   }
 })
