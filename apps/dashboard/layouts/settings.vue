@@ -1,17 +1,28 @@
 <template>
   <div class="settings-container">
     <div class="menu main-box menu-container">
-      <div class="menu-link">
-        <NuxtLink :to="{ path: '/settings/calendar' }"> Calendar </NuxtLink>
+      <div class="menu-link" :class="{ 'menu-link-active': activeSettings === 'calendar' }">
+        <NuxtLink :to="{ path: '/settings/calendar' }" @click="setActiveSettings('calendar')">
+          Calendar
+        </NuxtLink>
       </div>
-      <div class="menu-link">
-        <NuxtLink :to="{ path: '/settings/publicTransport' }"> Public Transport </NuxtLink>
+      <div class="menu-link" :class="{ 'menu-link-active': activeSettings === 'publicTransport' }">
+        <NuxtLink
+          :to="{ path: '/settings/publicTransport' }"
+          @click="setActiveSettings('publicTransport')"
+        >
+          Public Transport
+        </NuxtLink>
       </div>
-      <div class="menu-link">
-        <NuxtLink :to="{ path: '/settings/plants' }"> Plants </NuxtLink>
+      <div class="menu-link" :class="{ 'menu-link-active': activeSettings === 'plants' }">
+        <NuxtLink :to="{ path: '/settings/plants' }" @click="setActiveSettings('plants')">
+          Plants
+        </NuxtLink>
       </div>
-      <div class="menu-link">
-        <NuxtLink :to="{ path: '/settings/locations' }"> Locations </NuxtLink>
+      <div class="menu-link" :class="{ 'menu-link-active': activeSettings === 'locations' }">
+        <NuxtLink :to="{ path: '/settings/locations' }" @click="setActiveSettings('locations')">
+          Locations
+        </NuxtLink>
       </div>
     </div>
     <div class="menu main-box settings-details">
@@ -20,7 +31,13 @@
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const activeSettings = ref('calendar')
+
+const setActiveSettings = (settings: string) => {
+  activeSettings.value = settings
+}
+</script>
 
 <style lang="scss">
 @import '@nevo/style/variables.scss';
@@ -68,6 +85,12 @@
 .menu-link {
   display: grid;
   align-content: center;
+  margin: 0.25rem 0;
+}
+
+.menu-link-active {
+  background-color: $nevo-primary-color-light;
+  border-radius: 10px;
 }
 
 .menu-link:hover {
