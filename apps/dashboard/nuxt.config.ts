@@ -32,5 +32,5 @@ export default {
       autoprefixer: {}
     }
   },
-  css: ['~/assets/css/main.css']
+  css: ['@nevo/style/variables.scss', '@nevo/style/dark.scss', '@nevo/style/variables.scss']
 }

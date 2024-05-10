@@ -65,7 +65,9 @@ useInterceptor()
 <style lang="scss">
 @import '@nevo/style/variables.scss';
 @import '@nevo/style/dark.scss';
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 $total-width: calc(#{$box-width} * 3 + #{$box-gap} * 2 + #{$box-gap} * 6);
 
 html,

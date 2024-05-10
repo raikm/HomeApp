@@ -1,7 +1,10 @@
 <template>
   <div>
     <div class="plants-for-location" v-for="location in locations">
-      <h3 v-if="plants.filter((p) => p.location?.id === location.id).length > 0">
+      <h3
+        class="text-black dark:text-white"
+        v-if="plants.filter((p) => p.location?.id === location.id).length > 0"
+      >
         {{ location.name }}
       </h3>
       <div class="plants-per-room">

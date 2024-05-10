@@ -1,12 +1,15 @@
 <template>
-  <div v-if="measurements" class="plant-card-wrapper bg-white dark:bg-slate-700">
+  <div
+    v-if="measurements"
+    class="plant-card-wrapper bg-white dark:bg-slate-800 text-black dark:text-white"
+  >
     <div class="plant-card-header">
       <div class="plant-card-name">{{ name }}</div>
       <div v-if="measurementsOld" class="plant-card-status">⬤</div>
     </div>
     <div class="plant-card-parameter">
       <div class="plant-card-parameter-humidity">
-        <h6>Moisture</h6>
+        <h6 class="dark:text-white">Moisture</h6>
         <div class="bar-text">
           <PlantCardProgressBar
             barColor="#448cdb"
@@ -19,7 +22,7 @@
         </div>
       </div>
       <div class="plant-card-parameter-fertility">
-        <h6>Fertility</h6>
+        <h6 class="dark:text-white">Fertility</h6>
         <div class="bar-text">
           <PlantCardProgressBar
             barColor="#d07561"
@@ -72,7 +75,7 @@ if (measurements.value) {
 
 .plant-card-wrapper {
   width: calc($box-width / 2);
-  height: 5rem;
+  height: 6rem;
   border-radius: $standard-border-radius;
   display: grid;
   grid-template-rows: 1fr 1fr;
