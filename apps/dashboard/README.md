@@ -40,3 +40,7 @@ npm run preview
 ```
 
 Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/presets) for more information.
+
+# Scripts for Deployment
+
+`docker build -t nevo-dashboard . ` docker run -it -p 3000:3000 nevo-dashboard

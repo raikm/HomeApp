@@ -17,7 +17,7 @@ onMounted(async () => {
     <NuxtLink v-for="plant in plants" class="list-row" :to="`editPlant/${plant.id}`">
       <div class="list-row-left">
         <div class="list-row-name">{{ plant.name ?? 'Undefined' }}</div>
-        <div class="list-row-room">{{ plant.location?.name }}</div>
+        <div class="list-row-room">{{ plant.address }}</div>
       </div>
       <div class="list-row-right">
         <div class="list-row-version">

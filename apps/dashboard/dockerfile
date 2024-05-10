@@ -1,0 +1,18 @@
+# Dockerfile
+ARG NODE_VERSION=20.12.2
+
+FROM node:${NODE_VERSION}
+
+# create destination directory
+RUN mkdir -p /usr/src/dashboard
+WORKDIR /usr/src/dashboard
+
+# copy the app, note .dockerignore
+COPY  .output /usr/src/dashboard/
+
+EXPOSE 3000
+
+ENV NUXT_HOST=0.0.0.0
+ENV NUXT_PORT=3000
+
+CMD [ "node", "./server/index.mjs" ]

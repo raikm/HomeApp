@@ -127,3 +127,6 @@ typings/
 apps/api/db/sqlite.db
 apps/api/database.sqlite
 packages/domain-types/dist/
+apps/dashboard/.npmrc
+.npmrc
+.npmrc

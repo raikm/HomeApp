@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Event, Item } from '~~/types/googleCalendarResults'
-import config from '../../../../config.json'
+import config from '../../config.json'
 
 export class CalendarService {
   // TODO wrap in try catch

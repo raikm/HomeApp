@@ -20,5 +20,17 @@ export default {
   vite: {
     plugins: [svgLoader()]
   },
-  plugins: ['~/plugins/socketIO.ts']
+  runtimeConfig: {
+    public: {
+      baseURL: 'http://192.168.1.217:5001'
+    }
+  },
+  plugins: ['~/plugins/socketIO.ts'],
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {}
+    }
+  },
+  css: ['~/assets/css/main.css']
 }

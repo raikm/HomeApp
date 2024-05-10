@@ -6,7 +6,7 @@
   </div>
 
   <div id="main">
-    <NuxtLayout name="main">
+    <NuxtLayout>
       <NuxtPage class="content-container" />
     </NuxtLayout>
   </div>

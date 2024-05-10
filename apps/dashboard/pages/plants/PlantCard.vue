@@ -1,5 +1,5 @@
 <template>
-  <div v-if="measurements" class="plant-card-wrapper">
+  <div v-if="measurements" class="plant-card-wrapper bg-white dark:bg-slate-700">
     <div class="plant-card-header">
       <div class="plant-card-name">{{ name }}</div>
       <div v-if="measurementsOld" class="plant-card-status">⬤</div>
@@ -71,9 +71,8 @@ if (measurements.value) {
 @import '@nevo/style/variables.scss';
 
 .plant-card-wrapper {
-  width: $box-width / 2;
+  width: calc($box-width / 2);
   height: 5rem;
-  background-color: $white;
   border-radius: $standard-border-radius;
   display: grid;
   grid-template-rows: 1fr 1fr;
@@ -108,7 +107,7 @@ if (measurements.value) {
 }
 
 .plant-card-parameter {
-  border-radius: $standard-border-radius / 2;
+  border-radius: calc($standard-border-radius / 2);
   height: 4rem;
   display: grid;
   grid-template-columns: 49% 49%;

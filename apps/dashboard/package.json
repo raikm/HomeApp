@@ -10,21 +10,25 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "start": "nuxt start"
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3",
     "vite-svg-loader": "^3.6.0"
   },
   "dependencies": {
-    "nuxt": "3.2.0",
-    "@raikm/domain-types": "*",
-    "@nevo/ui": "*",
     "@nevo/style": "*",
+    "@nevo/ui": "*",
     "@pinia/nuxt": "^0.4.6",
+    "@raikm/domain-types": "1.0.0",
     "@types/ws": "^8.5.3",
     "axios": "^0.27.2",
     "googleapis": "^108.0.0",
     "home-assistant-js-websocket": "^8.0.0",
+    "nuxt": "3.2.0",
     "nuxt-vue3-google-signin": "^0.0.5",
     "pinia": "^2.0.30",
     "qs": "^6.11.0",

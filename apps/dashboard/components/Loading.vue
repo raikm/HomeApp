@@ -22,7 +22,7 @@
 
 $blade-count: 12;
 $blade-delay: 80ms;
-$blade-rotation-increment: 360deg / $blade-count;
+$blade-rotation-increment: calc(360deg / $blade-count);
 
 .ios-spinner {
   display: flex;

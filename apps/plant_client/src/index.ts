@@ -4,6 +4,7 @@ import fs from 'fs'
 import miflora from 'miflora'
 import fetch from 'node-fetch'
 import { PlantQueryData } from '../types/PlantQueryData.js'
+import path from 'path'
 
 async function getPlantsForDefinedFloor(): Promise<Plant[]> {
   const { address, port, prefix } = configuration.api
@@ -85,11 +86,12 @@ async function sendPlantDataToAPI(plantId: string | undefined, data: PlantQueryD
       body: JSON.stringify(measurement)
     }
   )
-  console.log(`Nachrichten Sendungstatus: ${response}`)
+  console.log(`Nachrichten Sendungstatus: ${response['status']}`)
   // response.json().then((body) => console.log(body))
 }
 
-const configuration = JSON.parse(fs.readFileSync('./src/configuration.json', 'utf8'))
+const configurationPath = path.join(__dirname, 'configuration.json')
+const configuration = JSON.parse(fs.readFileSync(configurationPath, 'utf8'))
 
 const plants = await getPlantsForDefinedFloor()
 
