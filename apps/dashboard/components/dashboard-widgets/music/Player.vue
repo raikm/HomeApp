@@ -287,7 +287,7 @@ const getFormatedTimeString = (seconds: number) => {
   durationTime.setHours(0)
   durationTime.setSeconds(seconds)
   const durationTimeString = durationTime.toLocaleTimeString()
-  if (durationTimeString.split(':')[1][0] === '0') return durationTimeString.slice(4, 8)
+  if (durationTimeString?.split(':')[1][0] === '0') return durationTimeString.slice(4, 8)
   return durationTimeString.slice(3, 8)
 }
 

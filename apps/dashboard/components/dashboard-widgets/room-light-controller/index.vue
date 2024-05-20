@@ -81,8 +81,8 @@ const store = useHomeAssistantStore()
 const triggerGroupState = (entity_id: string, state: string) => {
   if (state === 'unavailable') return
   let service = state == 'on' ? 'turn_off' : 'turn_on'
-  let domain = entity_id.split('.')[0]
-  store.haConnection.sendMessagePromise({
+  let domain = entity_id?.split('.')[0]
+  store.haConnection?.sendMessagePromise({
     type: 'call_service',
     domain: domain,
     service: service,

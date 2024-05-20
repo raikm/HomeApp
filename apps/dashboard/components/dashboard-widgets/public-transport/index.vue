@@ -70,7 +70,7 @@ const refreshDepartures = async () => {
   departuresFromHome.value = []
 
   const stopIdsString = localStorage.getItem('public-transport-selected-stops')
-  const stopIds = stopIdsString.split(',')
+  const stopIds = stopIdsString?.split(',')
 
   let departures = await publicTransportService.getDeparturesFromMultipleStops(stopIds)
   departures = departures.filter((d) => mapETATime(d.plannedWhen) > OFFSET_IN_MINUTES)
