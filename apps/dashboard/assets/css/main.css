@@ -1,0 +1,6 @@
+@tailwind base;
+
+/* see https://tailwindcss.com/docs/preflight#headings-are-unstyled */
+
+@tailwind components;
+@tailwind utilities;

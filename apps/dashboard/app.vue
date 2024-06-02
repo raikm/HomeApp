@@ -41,6 +41,7 @@ store.config = config as NevoConfig
 
 const createHomeassistantWebsocketConnection = async () => {
   try {
+    // TODO config into DB instead of config file
     const auth = createLongLivedTokenAuth(
       config.homeassistant.hassUrl,
       config.homeassistant.life_time_token_raik

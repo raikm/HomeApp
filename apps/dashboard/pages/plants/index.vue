@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div class="plants-for-location" v-for="location in locations">
+    <div class="max-w-screen-lg flex flex-col gap-2 my-4" v-for="location in locations">
       <h3
         class="text-black dark:text-white"
         v-if="plants.filter((p) => p.location?.id === location.id).length > 0"
       >
         {{ location.name }}
       </h3>
-      <div class="plants-per-room">
+      <div class="w-full grid grid-cols-6 gap-4 flex-wrap">
         <PlantCard
           v-for="plant in plants?.filter((p) => p.location?.id === location.id)"
           :name="plant.name"
@@ -33,12 +33,3 @@ onMounted(async () => {
   locations.value = await plantService.getAllLocations()
 })
 </script>
-
-<style lang="scss">
-@import '@nevo/style/variables.scss';
-.plants-per-room {
-  display: flex;
-  gap: $box-gap;
-  flex-wrap: wrap;
-}
-</style>

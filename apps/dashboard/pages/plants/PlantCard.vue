@@ -1,13 +1,13 @@
 <template>
   <div
     v-if="measurements"
-    class="plant-card-wrapper bg-white dark:bg-slate-800 text-black dark:text-white"
+    class="plant-card-wrapper flex flex-col bg-white dark:bg-slate-800 text-black dark:text-white"
   >
     <div class="plant-card-header">
-      <div class="plant-card-name">{{ name }}</div>
+      <div class="font-bold hyphens-auto" lang="de">{{ name }}</div>
       <div v-if="measurementsOld" class="plant-card-status">⬤</div>
     </div>
-    <div class="plant-card-parameter">
+    <div class="plant-card-parameter content-end">
       <div class="plant-card-parameter-humidity">
         <h6 class="dark:text-white">Moisture</h6>
         <div class="bar-text">
@@ -74,25 +74,17 @@ if (measurements.value) {
 @import '@nevo/style/variables.scss';
 
 .plant-card-wrapper {
-  width: calc($box-width / 2);
-  height: 6rem;
+  // width: calc($box-width / 2);
+  height: 6.5rem;
   border-radius: $standard-border-radius;
-  display: grid;
-  grid-template-rows: 1fr 1fr;
   padding: 8px;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 }
 
 .plant-card-header {
-  height: 2rem;
   display: grid;
   grid-template-columns: 85% auto;
   margin-bottom: 0.25rem;
-}
-
-.plant-card-name {
-  font-weight: bold;
-  word-wrap: break-word;
 }
 
 .plant-card-battery {

@@ -16,13 +16,9 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   font-size: 16px;
-
-  // height: 100vh;
 }
 
 #dashboard {
-  //https://webgradients.com/
-  // background-image: linear-gradient(120deg, #faf4e1 0%, #eed8b2 100%);
 }
 
 html,
@@ -30,6 +26,12 @@ body {
   margin: 0;
   height: 100%;
   overflow: hidden;
+}
+
+h3 {
+  font-size: 1.125rem !important/* 18px */;
+  line-height: 1.75rem !important/* 28px */;
+  font-weight: 700 !important;
 }
 
 h6 {
@@ -86,7 +88,7 @@ h6 {
   .info-icon-text {
     font-weight: 400;
     height: 100%;
-    // width: 100%;
+
     font-size: $standard-title-big;
     line-height: 80%;
 
@@ -98,7 +100,6 @@ h6 {
 
 .main-info-header {
   height: 20%;
-  // margin-bottom: 1.6%;
 }
 
 .main-info-title {
@@ -110,12 +111,10 @@ h6 {
 }
 
 .main-info-header-medium {
-  // display: inline-flex;
   font-size: 1.5em;
-  //line-height: 3vh;
+
   margin-bottom: 1.6%;
   font-weight: 500;
-  // overflow: hidden;
 }
 
 .main-info-title-big {
