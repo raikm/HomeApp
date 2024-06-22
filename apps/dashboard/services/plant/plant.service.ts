@@ -93,7 +93,23 @@ export class PlantService {
   }
 
   async refreshMeasurements(): Promise<void | null> {
-    await axios.post(`${useNuxtApp().$config.public.plantClientURLs.upstair}/run-script`)
-    await axios.post(`${useNuxtApp().$config.public.plantClientURLs.downstair}/run-script`)
+    try {
+      // Create two Axios promises for each POST request
+      const request1 = axios.post(
+        `${useNuxtApp().$config.public.plantClientURLs.upstair}/run-script`
+      )
+      const request2 = axios.post(
+        `${useNuxtApp().$config.public.plantClientURLs.downstair}/run-script`
+      )
+
+      // Execute both requests in parallel using Promise.all
+      await Promise.all([request1, request2])
+
+      // Both requests have completed successfully
+      console.log('Both requests completed successfully.')
+    } catch (error) {
+      // Handle errors from either request
+      console.error('Error occurred during requests:', error)
+    }
   }
 }

@@ -43,4 +43,16 @@ Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/prese
 
 # Scripts for Deployment
 
-`docker build -t nevo-dashboard . ` docker run -it -p 3000:3000 nevo-dashboard
+in project folder!
+
+```bash
+npm run build
+```
+
+```bash
+docker build -t nevo-dashboard .
+```
+
+```bash
+docker run -it -p 3000:3000 nevo-dashboard
+```
