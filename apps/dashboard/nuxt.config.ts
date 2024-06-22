@@ -22,7 +22,11 @@ export default {
   },
   runtimeConfig: {
     public: {
-      baseURL: 'http://192.168.1.217:5001'
+      baseURL: 'http://192.168.1.217:5001',
+      plantClientURLs: {
+        upstair: 'http://192.168.1.218:3000',
+        downstair: 'http://192.168.1.79:3000'
+      }
     }
   },
   plugins: ['~/plugins/socketIO.ts'],

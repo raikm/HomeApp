@@ -5,7 +5,8 @@
   >
     <div class="plant-card-header">
       <div class="font-bold hyphens-auto" lang="de">{{ name }}</div>
-      <div v-if="measurementsOld" class="plant-card-status">⬤</div>
+      <div v-if="measurementsOld" class="plant-card-status text-red-500">⬤</div>
+      <div v-if="measurementsOlderThen15m" class="plant-card-status text-yellow-100">⬤</div>
     </div>
     <div class="plant-card-parameter content-end">
       <div class="plant-card-parameter-humidity">
@@ -64,9 +65,12 @@ measurements.value = await plantService.getLastMeasurements(id)
 
 // TODO correct validation
 const measurementsOld = ref(false)
+const measurementsOlderThen15m = ref(false)
 if (measurements.value) {
   measurementsOld.value =
     new Date(measurements.value.datetime) < new Date(Date.now() - 2 * 24 * 60 * 60 * 1000)
+  measurementsOlderThen15m.value =
+    new Date(measurements.value.datetime) < new Date(Date.now() - 15 * 60 * 1000)
 }
 </script>
 
@@ -97,7 +101,7 @@ if (measurements.value) {
 
 .plant-card-status {
   justify-self: right;
-  color: $red;
+
   font-size: xx-small;
 }
 

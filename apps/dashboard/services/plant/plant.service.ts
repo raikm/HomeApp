@@ -91,4 +91,9 @@ export class PlantService {
 
     return response?.data ?? null
   }
+
+  async refreshMeasurements(): Promise<void | null> {
+    await axios.post(`${useNuxtApp().$config.public.plantClientURLs.upstair}/run-script`)
+    await axios.post(`${useNuxtApp().$config.public.plantClientURLs.downstair}/run-script`)
+  }
 }

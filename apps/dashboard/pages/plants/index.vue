@@ -1,6 +1,9 @@
 <template>
-  <div>
-    <div class="max-w-screen-lg flex flex-col gap-2 my-4" v-for="location in locations">
+  <div class="max-w-screen-lg">
+    <div class="grid place-content-end">
+      <nv-button @click="plantService.refreshMeasurements()">Refresh</nv-button>
+    </div>
+    <div class="flex flex-col gap-2 my-4" v-for="location in locations">
       <h3
         class="text-black dark:text-white"
         v-if="plants.filter((p) => p.location?.id === location.id).length > 0"
@@ -20,6 +23,7 @@
 </template>
 
 <script lang="ts" setup>
+import { nvButton } from '@nevo/ui'
 import { Location, Plant } from '@raikm/domain-types'
 import { usePlantService } from '~~/services/plant'
 import PlantCard from './PlantCard.vue'
