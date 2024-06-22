@@ -106,6 +106,8 @@ body {
   // grid-template-columns: auto auto;
   padding: 0 1rem;
   height: 100%;
+  overflow-y: scroll;
+  scrollbar-width: none;
   min-width: $total-width;
 }
 #footer {
